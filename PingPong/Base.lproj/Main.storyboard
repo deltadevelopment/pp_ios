@@ -250,7 +250,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.5568627451" green="0.2666666667" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendCell" rowHeight="75" id="vUW-fL-3ew" customClass="MainTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="friendCell" rowHeight="75" id="vUW-fL-3ew" customClass="MainTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vUW-fL-3ew" id="hhA-53-iSd">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -258,8 +258,12 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera.png" translatesAutoresizingMaskIntoConstraints="NO" id="JcO-zP-BNB">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="3J6-po-PkB"/>
-                                                <constraint firstAttribute="width" constant="40" id="cLy-9L-76u"/>
+                                                <constraint firstAttribute="height" constant="40" id="3J6-po-PkB">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="25"/>
+                                                </constraint>
+                                                <constraint firstAttribute="width" constant="40" id="cLy-9L-76u">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="25"/>
+                                                </constraint>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -267,7 +271,8 @@
                                                     <exclude reference="cLy-9L-76u"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="358" y="27" width="25" height="25"/>
                                                 <mask key="constraints">
                                                     <include reference="3J6-po-PkB"/>
                                                     <include reference="cLy-9L-76u"/>
@@ -276,9 +281,12 @@
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nqd-iL-VgN">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="28" y="27" width="39" height="21"/>
+                                            </variation>
                                         </label>
                                     </subviews>
                                     <constraints>
@@ -462,8 +470,60 @@
                     <view key="view" contentMode="scaleToFill" id="N1q-ts-GN2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1PQ-GU-s9H">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.5568627451" green="0.2666666667" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="645"/>
+                                </variation>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tap to add" translatesAutoresizingMaskIntoConstraints="NO" id="SAX-rP-Rih">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="70"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
+                                </variation>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" secondItem="SAX-rP-Rih" secondAttribute="height" id="0QD-cU-lKJ"/>
+                            <constraint firstItem="1PQ-GU-s9H" firstAttribute="width" secondItem="N1q-ts-GN2" secondAttribute="width" id="eok-nv-JYd"/>
+                            <constraint firstAttribute="width" secondItem="SAX-rP-Rih" secondAttribute="width" id="pWC-GR-1dl"/>
+                            <constraint firstItem="1PQ-GU-s9H" firstAttribute="height" secondItem="N1q-ts-GN2" secondAttribute="height" id="yNa-tz-geJ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="1PQ-GU-s9H"/>
+                                <exclude reference="SAX-rP-Rih"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="eok-nv-JYd"/>
+                                <exclude reference="yNa-tz-geJ"/>
+                                <exclude reference="0QD-cU-lKJ"/>
+                                <exclude reference="pWC-GR-1dl"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="1PQ-GU-s9H"/>
+                                <include reference="SAX-rP-Rih"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="eok-nv-JYd"/>
+                                <include reference="yNa-tz-geJ"/>
+                                <include reference="0QD-cU-lKJ"/>
+                                <include reference="pWC-GR-1dl"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="cameraView" destination="1PQ-GU-s9H" id="dzy-1I-dfy"/>
+                        <outlet property="textView" destination="SAX-rP-Rih" id="K0Z-9X-Ngf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dFP-5L-oIX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

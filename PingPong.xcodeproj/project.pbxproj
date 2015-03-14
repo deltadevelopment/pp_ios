@@ -40,6 +40,8 @@
 		C5D574DC1AB4641500D2FC37 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574DB1AB4641500D2FC37 /* LoginController.m */; };
 		C5D574DE1AB47FFC00D2FC37 /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D574DD1AB47FFC00D2FC37 /* tick.png */; };
 		C5D574E11AB488F300D2FC37 /* FriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574E01AB488F300D2FC37 /* FriendsController.m */; };
+		C5D574E41AB4A07200D2FC37 /* CameraHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574E31AB4A07200D2FC37 /* CameraHelper.m */; };
+		C5D574E71AB4AF0400D2FC37 /* FriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574E61AB4AF0400D2FC37 /* FriendModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,10 @@
 		C5D574DD1AB47FFC00D2FC37 /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tick.png; path = ../../../Downloads/tick.png; sourceTree = "<group>"; };
 		C5D574DF1AB488F300D2FC37 /* FriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsController.h; sourceTree = "<group>"; };
 		C5D574E01AB488F300D2FC37 /* FriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsController.m; sourceTree = "<group>"; };
+		C5D574E21AB4A07200D2FC37 /* CameraHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraHelper.h; sourceTree = "<group>"; };
+		C5D574E31AB4A07200D2FC37 /* CameraHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraHelper.m; sourceTree = "<group>"; };
+		C5D574E51AB4AF0400D2FC37 /* FriendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendModel.h; sourceTree = "<group>"; };
+		C5D574E61AB4AF0400D2FC37 /* FriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +219,8 @@
 		C5D574951AB43DFF00D2FC37 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				C5D574E51AB4AF0400D2FC37 /* FriendModel.h */,
+				C5D574E61AB4AF0400D2FC37 /* FriendModel.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -262,6 +270,8 @@
 				C5D574D51AB463A500D2FC37 /* ApplicationHelper.m */,
 				C5D574D71AB463E500D2FC37 /* ConfigHelper.h */,
 				C5D574D81AB463E600D2FC37 /* ConfigHelper.m */,
+				C5D574E21AB4A07200D2FC37 /* CameraHelper.h */,
+				C5D574E31AB4A07200D2FC37 /* CameraHelper.m */,
 			);
 			name = helpers;
 			sourceTree = "<group>";
@@ -393,12 +403,14 @@
 				C5D574E11AB488F300D2FC37 /* FriendsController.m in Sources */,
 				C5D574AB1AB4406700D2FC37 /* SSKeychainQuery.m in Sources */,
 				C5D574AA1AB4406700D2FC37 /* SSKeychain.m in Sources */,
+				C5D574E41AB4A07200D2FC37 /* CameraHelper.m in Sources */,
 				C5D574B11AB4467300D2FC37 /* ColorHelper.m in Sources */,
 				C5D574711AB4331F00D2FC37 /* ViewController.m in Sources */,
 				C5D5746E1AB4331F00D2FC37 /* AppDelegate.m in Sources */,
 				C5D574AE1AB440A800D2FC37 /* AuthHelper.m in Sources */,
 				C5D5749B1AB43F7100D2FC37 /* MainTableViewCell.m in Sources */,
 				C5D574C61AB44D9400D2FC37 /* NavigationViewController.m in Sources */,
+				C5D574E71AB4AF0400D2FC37 /* FriendModel.m in Sources */,
 				C5D5749E1AB43F8200D2FC37 /* MainTableViewController.m in Sources */,
 				C5D574D31AB4633800D2FC37 /* ParserHelper.m in Sources */,
 				C5D574D91AB463E600D2FC37 /* ConfigHelper.m in Sources */,

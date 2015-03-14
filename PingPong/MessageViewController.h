@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FriendModel.h"
 @interface MessageViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *imageRecieved;
 @property (weak, nonatomic) IBOutlet UITextView *textRecieved;
+-(void)setFriend:(FriendModel*) friend;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "MessageViewController.h"
 #import "ComposeViewController.h"
+#import "FriendModel.h"
 
 @interface MessageViewController ()
 
@@ -15,6 +16,7 @@
 
 @implementation MessageViewController
 ComposeViewController *composeViewController;
+FriendModel *currentFriend;
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.imageRecieved.userInteractionEnabled =YES;
@@ -30,6 +32,12 @@ ComposeViewController *composeViewController;
     
     // Do any additional setup after loading the view.
     [self.navigationItem.rightBarButtonItem setBackgroundImage:[UIImage imageNamed:@"settings.png"] forState:UIControlStateNormal barMetrics:nil];
+}
+
+-(void)setFriend:(FriendModel*) friend{
+    currentFriend = friend;
+    //self.navigationController.navigationBar.topItem.title =@"test";//[friend username];
+    [[self navigationItem] setTitle:[friend username]];
 }
 
 -(void)handleSwipeGestureRight{
@@ -50,6 +58,7 @@ ComposeViewController *composeViewController;
     transition.delegate = self;
     [self.view.layer addAnimation:transition forKey:nil];
     [self.view addSubview:composeViewController.view];
+    //[self presentViewController:composeViewController animated:NO completion:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

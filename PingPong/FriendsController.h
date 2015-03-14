@@ -9,5 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ApplicationController.h"
 @interface FriendsController : ApplicationController
-
+-(void)addFriend:(NSString*) username withSelector:(SEL) selector withSuccess:(SEL) successSelector withObject:(NSObject *) object;
+-(void)initFriends;
+-(NSMutableArray *)getFriends;
+-(void)initFriendRequests;
+-(NSMutableArray *)getFriendRequests;
 @end

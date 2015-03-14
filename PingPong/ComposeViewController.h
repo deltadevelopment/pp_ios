@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ComposeViewController : UIViewController
+@interface ComposeViewController : UIViewController<UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet UIView *cameraView;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end
