@@ -33,6 +33,7 @@
 		C5D574C61AB44D9400D2FC37 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574C51AB44D9400D2FC37 /* NavigationViewController.m */; };
 		C5D574C81AB454AC00D2FC37 /* selfie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C5D574C71AB454AC00D2FC37 /* selfie.jpg */; };
 		C5D574CA1AB4573100D2FC37 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D574C91AB4573100D2FC37 /* settings.png */; };
+		C5D574CD1AB45E3800D2FC37 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574CC1AB45E3800D2FC37 /* ComposeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,8 @@
 		C5D574C51AB44D9400D2FC37 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		C5D574C71AB454AC00D2FC37 /* selfie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = selfie.jpg; path = ../../../Downloads/selfie.jpg; sourceTree = "<group>"; };
 		C5D574C91AB4573100D2FC37 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = ../../../Downloads/settings.png; sourceTree = "<group>"; };
+		C5D574CB1AB45E3800D2FC37 /* ComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
+		C5D574CC1AB45E3800D2FC37 /* ComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +212,8 @@
 				C5D574A31AB43FA800D2FC37 /* SettingsViewController.m */,
 				C5D574C41AB44D9400D2FC37 /* NavigationViewController.h */,
 				C5D574C51AB44D9400D2FC37 /* NavigationViewController.m */,
+				C5D574CB1AB45E3800D2FC37 /* ComposeViewController.h */,
+				C5D574CC1AB45E3800D2FC37 /* ComposeViewController.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 				C5D5749B1AB43F7100D2FC37 /* MainTableViewCell.m in Sources */,
 				C5D574C61AB44D9400D2FC37 /* NavigationViewController.m in Sources */,
 				C5D5749E1AB43F8200D2FC37 /* MainTableViewController.m in Sources */,
+				C5D574CD1AB45E3800D2FC37 /* ComposeViewController.m in Sources */,
 				C5D5746B1AB4331F00D2FC37 /* main.m in Sources */,
 				C5D574A41AB43FA800D2FC37 /* SettingsViewController.m in Sources */,
 			);
