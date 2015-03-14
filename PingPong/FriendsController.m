@@ -16,7 +16,7 @@ FriendModel *addedFriend;
 
 -(void)initFriends{
     friends = [[NSMutableArray alloc] init];
-    NSString *url = [NSString stringWithFormat:@"/user/%@/friends", [authHelper getUserId]];
+    NSString *url = [NSString stringWithFormat:@"user/%@/friends", [authHelper getUserId]];
     NSData *response = [self getHttpRequest:url];
     //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
     //NSLog(@"HER: %@",strdata);
@@ -34,7 +34,7 @@ FriendModel *addedFriend;
 -(void)initFriendRequests{
    
     friendRequests = [[NSMutableArray alloc] init];
-    NSString *url = [NSString stringWithFormat:@"/user/%@/friend_requests", [authHelper getUserId]];
+    NSString *url = [NSString stringWithFormat:@"user/%@/friend_requests", [authHelper getUserId]];
     NSData *response = [self getHttpRequest:url];
     //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
     //NSLog(@"HER: %@",strdata);
@@ -55,6 +55,27 @@ FriendModel *addedFriend;
 
 -(NSMutableArray *)getFriendRequests{
     return friendRequests;
+}
+
+-(void)deleteFriend:(NSString *) userId withSuccess:(SEL) success andObject:(NSObject *) object{
+    NSData *response2 = [self deleteHttpRequest:[NSString stringWithFormat:@"user/%@/friend/%@", [authHelper getUserId], userId]];
+    NSMutableDictionary *dic = [parserHelper parse:response2];
+[object performSelector:success];
+}
+
+-(void)acceptFriendRequestFromUser:(NSString *) userId withSucess:(SEL)success andObject: (NSObject *) object{
+///user/#{id}/accept_friend/#{friend_id}
+    NSData *response2 = [self postHttpRequest:[NSString stringWithFormat:@"user/%@/accept_friend/%@", [authHelper getUserId], userId]  json:nil];
+    NSMutableDictionary *dic = [parserHelper parse:response2];
+    
+    if(!isErrors){
+        NSLog(@"ingen feil her");
+        
+        [object performSelector:success];
+        
+    }
+    NSString *strdata=[[NSString alloc]initWithData:response2 encoding:NSUTF8StringEncoding];
+    NSLog(strdata);
 }
 
 

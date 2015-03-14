@@ -29,6 +29,7 @@ UIView *currentTitleView;
 SEL selectorTest;
 SEL successSelector;
 FriendsController *friendsController;
+NSIndexPath *currentIndexPath;
 int sections = 1;
 UIBarButtonItem *currentRight;
 
@@ -39,6 +40,7 @@ UIBarButtonItem *currentRight;
     [friendsController initFriends];
     [friendsController initFriendRequests];
     [super viewDidLoad];
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
       NSLog(@"start");
    // friends = [[NSMutableArray alloc] initWithObjects:@"Roger",@"Simen", @"Chris", @"Frode", @"Christian", nil];
     friends = [friendsController getFriends];
@@ -152,9 +154,9 @@ UIBarButtonItem *currentRight;
         [cell iconImage].userInteractionEnabled =YES;
         [cell.iconImage setImage:[UIImage imageNamed:@"tick.png"]];
         UITapGestureRecognizer *tapGr;
-        tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMessage:)];
+        tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(acceptFriendRequest:)];
         tapGr.numberOfTapsRequired = 1;
-        [tapGr setCancelsTouchesInView: YES];
+        //[tapGr setCancelsTouchesInView: YES];
         //[tapGr setDelegate: self];
         [[cell iconImage] addGestureRecognizer:tapGr];
         if(indexPath.row == [friends count] - 1){
@@ -190,6 +192,61 @@ UIBarButtonItem *currentRight;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+-(void)acceptFriendRequest:(UITapGestureRecognizer *) sender{
+    CGPoint tapLocation = [sender locationInView:self.tableView];
+    NSIndexPath *tapIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
+    FriendModel *friendRequest = [friendRequests objectAtIndex:tapIndexPath.row];
+    //NSString *userId = [NSString stringWithFormat:@"%d", [friendRequest userId] ];
+    SEL success = @selector(acceptSuccess);
+    [friendsController acceptFriendRequestFromUser:[friendRequest userId] withSucess:success andObject:self];
+
+    
+}
+-(void)acceptSuccess{
+    NSLog(@"success");
+    [friendsController initFriends];
+    [friendsController initFriendRequests];
+    friends = [friendsController getFriends];
+    friendRequests = [friendsController getFriendRequests];
+    [self.tableView reloadData];
+}
+
+
+
+
+// Override to support conditional editing of the table view.
+// This only needs to be implemented if you are going to be returning NO
+// for some items. By default, all items are editable.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //add code here for when you hit delete
+        NSLog(@"delete user ere");
+        if(indexPath.section == 0){
+            FriendModel *friendModel = [friends objectAtIndex:indexPath.row];
+            SEL successSelector = @selector(deleteFriendSuccessful);
+            currentIndexPath = indexPath;
+            [friendsController deleteFriend:[friendModel userId] withSuccess:successSelector andObject:self];
+        }else{
+            FriendModel *friendModel = [friendRequests objectAtIndex:indexPath.row];
+
+        }
+        
+    }
+}
+
+-(void)deleteFriendSuccessful{
+//HER er  brukeren slettet
+    NSLog(@"brukeren er slettet");
+    
+    [friends removeObjectAtIndex:currentIndexPath.row];
+    [self.tableView reloadData];
+}
 
 /*
 // Override to support conditional editing of the table view.

@@ -21,7 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     AuthHelper *authHelper = [[AuthHelper alloc] init];
-    //[authHelper resetCredentials];
+    [authHelper resetCredentials];
     NSLog(@"cr %@", [authHelper getAuthToken]);
     if([authHelper getAuthToken] == nil){
         [self setView:[[ViewController alloc] init] second:@"login"];

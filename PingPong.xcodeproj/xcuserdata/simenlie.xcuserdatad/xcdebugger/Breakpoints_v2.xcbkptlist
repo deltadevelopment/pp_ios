@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PingPong/FriendsController.m"
-            timestampString = "448055262.872641"
+            timestampString = "448058657.384437"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "-addFriend:withSelector:withSuccess:withObject:"
             landmarkType = "5">
          </BreakpointContent>

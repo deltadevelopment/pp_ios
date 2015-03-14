@@ -14,4 +14,6 @@
 -(NSMutableArray *)getFriends;
 -(void)initFriendRequests;
 -(NSMutableArray *)getFriendRequests;
+-(void)deleteFriend:(NSString *) userId withSuccess:(SEL) success andObject:(NSObject *) object;
+-(void)acceptFriendRequestFromUser:(NSString *) userId withSucess:(SEL)success andObject: (NSObject *) object;
 @end
