@@ -327,6 +327,9 @@
                     <navigationItem key="navigationItem" title="Ping Pong" id="CDw-2Y-qYK">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="O1Y-Cw-ZbO">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="search:" destination="9px-I4-t5Z" id="IEO-UH-dwF"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="JCI-De-lDA">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -335,6 +338,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addFriendButton" destination="O1Y-Cw-ZbO" id="bqe-2e-Fdq"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZeH-NB-jbB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -472,9 +478,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.59607843140000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" red="1" green="0.59607843137254901" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

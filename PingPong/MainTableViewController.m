@@ -19,6 +19,12 @@
 @implementation MainTableViewController
 NSMutableArray *friends;
 ColorHelper* colorHelper;
+UIView *top;
+UIBarButtonItem *exitButton;
+UIBarButtonItem *currentLeft;
+UITextField *searchText;
+
+UIBarButtonItem *currentRight;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,6 +56,8 @@ ColorHelper* colorHelper;
    // self.navigationItem.leftBarButtonItem
     
 }
+
+
 
 -(void)showSettings{
     SettingsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"settings"];
@@ -144,5 +152,152 @@ ColorHelper* colorHelper;
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)search:(id)sender {
+    [self setSearchUI];
+}
+
+-(void)exitSearch{
+    [top removeFromSuperview];
+    self.navigationItem.leftBarButtonItem=currentLeft;
+    self.navigationItem.rightBarButtonItem=currentRight;
+}
+
+-(void)addFriend{
+    NSLog(@"adding friend");
+    [searchText resignFirstResponder];
+    UIActivityIndicatorView * activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [activityView startAnimating];
+    [activityView setHidden:NO];
+    [activityView sizeToFit];
+    [activityView setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin)];
+    UIBarButtonItem *loadingView = [[UIBarButtonItem alloc] initWithCustomView:activityView];
+    [self.navigationItem setRightBarButtonItem:loadingView];
+    [NSTimer scheduledTimerWithTimeInterval:1.0
+                                     target:self
+                                   selector:@selector(userDoesNotExist)
+                                   userInfo:nil
+                                    repeats:NO];
+    
+}
+-(void)getRequestIsDone{
+    NSLog(@"hey");
+    CGRect frameimg = CGRectMake(0, 0, 20, 20);
+    UIButton *settingsButton = [[UIButton alloc] initWithFrame:frameimg];
+    [settingsButton setBackgroundImage:[UIImage imageNamed:@"tick.png"] forState:UIControlStateNormal];
+    UIBarButtonItem *btn =[[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+    [self.navigationItem setRightBarButtonItem:btn];
+    [NSTimer scheduledTimerWithTimeInterval:0.5
+                                     target:self
+                                   selector:@selector(exitSearch)
+                                   userInfo:nil
+                                    repeats:NO];
+
+}
+
+-(void)userDoesNotExist{
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:2];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1 green:0.596 blue:0 alpha:1];
+    [UIView commitAnimations];
+    [self setRightPlusButton];
+    //searchText.placeholder = @"User doesnt exists";
+    [searchText becomeFirstResponder];
+    
+    
+
+}
+
+-(void)setRightPlusButton{
+    CGRect frameimg = CGRectMake(0, 0, 20, 20);
+    UIButton *settingsButton = [[UIButton alloc] initWithFrame:frameimg];
+    [settingsButton setBackgroundImage:[UIImage imageNamed:@"plus.png"] forState:UIControlStateNormal];
+    [settingsButton addTarget:self action:@selector(addFriend)
+             forControlEvents:UIControlEventTouchUpInside];
+    exitButton =[[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+    
+    self.navigationItem.rightBarButtonItem=exitButton;
+    
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+        return YES;
+    
+   
+    return YES;
+}
+
+
+
+
+-(void)setSearchUI{
+   top= [[UIView alloc] init];
+    [top setFrame:CGRectMake(0, 0, 200, 35)];
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat center = (screenWidth/4) - (10);
+    
+    
+    CGRect frameimg = CGRectMake(0, 0, 20, 20);
+    currentRight = self.navigationItem.rightBarButtonItem;
+    [self setRightPlusButton];
+    
+
+    UIButton *someButton = [[UIButton alloc] initWithFrame:frameimg];
+    [someButton setBackgroundImage:[UIImage imageNamed:@"cross.png"] forState:UIControlStateNormal];
+    [someButton addTarget:self action:@selector(exitSearch)
+         forControlEvents:UIControlEventTouchUpInside];
+    exitButton =[[UIBarButtonItem alloc] initWithCustomView:someButton];
+    currentLeft = self.navigationItem.leftBarButtonItem;
+    self.navigationItem.leftBarButtonItem=exitButton;
+    
+    
+    searchText = [[UITextField alloc]init];
+    [searchText setTextColor:[UIColor whiteColor]];
+    [searchText setFrame:CGRectMake(-30, -2, 250, 40)];
+    [searchText setPlaceholder:@"Enter your friends username"];
+    searchText.delegate = self;
+    
+    UIButton *leftButton = [self createButton:@"feed-icon.png" x:center-80];
+    UIButton *middleButton = [self createButton:@"events-icon.png" x:center];
+    UIButton *rightButton = [self createButton:@"profile-icon.png" x:center + 80];
+    //UILabel *label = [[UILabel alloc] init];
+    //label.text = @"4";
+    //[label setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:16]];
+    //label.textColor = [UIColor whiteColor];
+    //[label setFrame:CGRectMake(250, 0, 30, 30)];
+    [rightButton addTarget:self
+                    action:@selector(showProfile)
+          forControlEvents:UIControlEventTouchUpInside];
+    [leftButton addTarget:self
+                   action:@selector(showFeed)
+         forControlEvents:UIControlEventTouchUpInside];
+    
+   // [top addSubview:leftButton];
+    //[top addSubview:middleButton];
+    [top addSubview:searchText];
+    //[top addSubview:label];
+    self.navigationItem.titleView = top;
+    //self.navigationItem.leftBarButtonItem = nil;
+   // self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain
+                                                                          //  target:nil action:nil];
+}
+
+-(UIButton *)createButton:(NSString *) img x:(int) xPos{
+    UIButton *navButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIImage *buttonImage = [UIImage imageNamed:img];
+    //buttonImage = [self resizeImage:buttonImage newSize:CGSizeMake(30,30)];
+    [navButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    [navButton setTitleColor:[UIColor colorWithRed:0.4 green:0.157 blue:0.396 alpha:1]  forState:UIControlStateNormal];
+    [navButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    // [navButton bringSubviewToFront:navButton.imageView];
+    
+    [navButton setFrame:CGRectMake(xPos, 0, 30, 30)];
+    return navButton;
+}
+
+
 
 @end

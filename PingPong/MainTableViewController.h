@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainTableViewController : UITableViewController
+@interface MainTableViewController : UITableViewController<UITextFieldDelegate>
+- (IBAction)search:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addFriendButton;
 
 @end

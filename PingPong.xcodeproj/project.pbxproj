@@ -23,7 +23,6 @@
 		C5D574AE1AB440A800D2FC37 /* AuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574AD1AB440A800D2FC37 /* AuthHelper.m */; };
 		C5D574B11AB4467300D2FC37 /* ColorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574B01AB4467300D2FC37 /* ColorHelper.m */; };
 		C5D574BB1AB44CFA00D2FC37 /* video.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D574B21AB44CFA00D2FC37 /* video.png */; };
-		C5D574BC1AB44CFA00D2FC37 /* tick (1).png in Resources */ = {isa = PBXBuildFile; fileRef = C5D574B31AB44CFA00D2FC37 /* tick (1).png */; };
 		C5D574BE1AB44CFA00D2FC37 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D574B51AB44CFA00D2FC37 /* plus.png */; };
 		C5D574BF1AB44CFA00D2FC37 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D574B61AB44CFA00D2FC37 /* search.png */; };
 		C5D574C01AB44CFA00D2FC37 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D574B71AB44CFA00D2FC37 /* play.png */; };
@@ -39,6 +38,8 @@
 		C5D574D61AB463A500D2FC37 /* ApplicationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574D51AB463A500D2FC37 /* ApplicationHelper.m */; };
 		C5D574D91AB463E600D2FC37 /* ConfigHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574D81AB463E600D2FC37 /* ConfigHelper.m */; };
 		C5D574DC1AB4641500D2FC37 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574DB1AB4641500D2FC37 /* LoginController.m */; };
+		C5D574DE1AB47FFC00D2FC37 /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D574DD1AB47FFC00D2FC37 /* tick.png */; };
+		C5D574E11AB488F300D2FC37 /* FriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574E01AB488F300D2FC37 /* FriendsController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +83,6 @@
 		C5D574AF1AB4467300D2FC37 /* ColorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorHelper.h; sourceTree = "<group>"; };
 		C5D574B01AB4467300D2FC37 /* ColorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorHelper.m; sourceTree = "<group>"; };
 		C5D574B21AB44CFA00D2FC37 /* video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = video.png; path = ../../../Downloads/video.png; sourceTree = "<group>"; };
-		C5D574B31AB44CFA00D2FC37 /* tick (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tick (1).png"; path = "../../../Downloads/tick (1).png"; sourceTree = "<group>"; };
 		C5D574B51AB44CFA00D2FC37 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plus.png; path = ../../../Downloads/plus.png; sourceTree = "<group>"; };
 		C5D574B61AB44CFA00D2FC37 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = search.png; path = ../../../Downloads/search.png; sourceTree = "<group>"; };
 		C5D574B71AB44CFA00D2FC37 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play.png; path = ../../../Downloads/play.png; sourceTree = "<group>"; };
@@ -105,6 +105,9 @@
 		C5D574D81AB463E600D2FC37 /* ConfigHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigHelper.m; sourceTree = "<group>"; };
 		C5D574DA1AB4641500D2FC37 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		C5D574DB1AB4641500D2FC37 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		C5D574DD1AB47FFC00D2FC37 /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tick.png; path = ../../../Downloads/tick.png; sourceTree = "<group>"; };
+		C5D574DF1AB488F300D2FC37 /* FriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsController.h; sourceTree = "<group>"; };
+		C5D574E01AB488F300D2FC37 /* FriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,9 +197,9 @@
 			isa = PBXGroup;
 			children = (
 				C5D574B21AB44CFA00D2FC37 /* video.png */,
-				C5D574B31AB44CFA00D2FC37 /* tick (1).png */,
 				C5D574B51AB44CFA00D2FC37 /* plus.png */,
 				C5D574C91AB4573100D2FC37 /* settings.png */,
+				C5D574DD1AB47FFC00D2FC37 /* tick.png */,
 				C5D574B61AB44CFA00D2FC37 /* search.png */,
 				C5D574C71AB454AC00D2FC37 /* selfie.jpg */,
 				C5D574B71AB44CFA00D2FC37 /* play.png */,
@@ -240,6 +243,8 @@
 				C5D574CF1AB462A400D2FC37 /* ApplicationController.m */,
 				C5D574DA1AB4641500D2FC37 /* LoginController.h */,
 				C5D574DB1AB4641500D2FC37 /* LoginController.m */,
+				C5D574DF1AB488F300D2FC37 /* FriendsController.h */,
+				C5D574E01AB488F300D2FC37 /* FriendsController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 				C5D574C11AB44CFA00D2FC37 /* cross.png in Resources */,
 				C5D574C21AB44CFA00D2FC37 /* message.png in Resources */,
 				C5D574741AB4331F00D2FC37 /* Main.storyboard in Resources */,
+				C5D574DE1AB47FFC00D2FC37 /* tick.png in Resources */,
 				C5D574C01AB44CFA00D2FC37 /* play.png in Resources */,
 				C5D574791AB4331F00D2FC37 /* LaunchScreen.xib in Resources */,
 				C5D574C81AB454AC00D2FC37 /* selfie.jpg in Resources */,
@@ -364,7 +370,6 @@
 				C5D574BE1AB44CFA00D2FC37 /* plus.png in Resources */,
 				C5D574CA1AB4573100D2FC37 /* settings.png in Resources */,
 				C5D574C31AB44CFA00D2FC37 /* camera.png in Resources */,
-				C5D574BC1AB44CFA00D2FC37 /* tick (1).png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +390,7 @@
 				C5D574D01AB462A400D2FC37 /* ApplicationController.m in Sources */,
 				C5D574A11AB43F9C00D2FC37 /* MessageViewController.m in Sources */,
 				C5D574D61AB463A500D2FC37 /* ApplicationHelper.m in Sources */,
+				C5D574E11AB488F300D2FC37 /* FriendsController.m in Sources */,
 				C5D574AB1AB4406700D2FC37 /* SSKeychainQuery.m in Sources */,
 				C5D574AA1AB4406700D2FC37 /* SSKeychain.m in Sources */,
 				C5D574B11AB4467300D2FC37 /* ColorHelper.m in Sources */,
