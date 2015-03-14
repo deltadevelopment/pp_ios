@@ -8,15 +8,17 @@
 
 #import "ViewController.h"
 #import "MainTableViewController.h"
+#import "LoginController.h"
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
-
+LoginController* loginController;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    loginController = [[LoginController alloc] init];
     [self addLine:self.usernameTextField];
     [self addLine:self.passwordTextField];
     [super viewDidLoad];
@@ -25,7 +27,7 @@
     self.passwordTextField.delegate = self;
     [self setTextFieldStyle:self.usernameTextField];
     [self setTextFieldStyle:self.passwordTextField];
-    
+    self.indicator.hidden = YES;
    // self.loginButton.hidden = YES;
     [self.usernameTextField addTarget:self
                                action:@selector(textFieldDidChange:)
@@ -38,6 +40,10 @@
     //[self showLogin];
     
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    //[self.usernameTextField becomeFirstResponder];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -72,7 +78,7 @@
         return YES;
     }
     else if(textField == self.passwordTextField){
-        [self login:nil];
+        //[self login:nil];
         [self.passwordTextField resignFirstResponder];
         return NO;
     }
@@ -135,15 +141,56 @@
 }
 
 - (IBAction)login:(id)sender {
+    //LOGIN og send til mainview
+    
+    [self.indicator setHidden:NO];
+    
+    [self.indicator startAnimating];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [loginController login:self.usernameTextField.text pass:self.passwordTextField.text];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+            [self.indicator stopAnimating];
+            if([loginController hasError]){
+                [self errorAnimation];
+                NSLog(@"erors");
+                 [self.indicator setHidden:YES];
+            }else{
+                [self showFriends];
+            }
+        });
+    });
 }
-- (IBAction)signupAction:(id)sender {
-    //SIGNUP og send til mainView
-    [self showFriends];
+
+-(void)showError:(UILabel*) errorLabel
+        errorMsg:(NSString*) error {
+    
+    if(error != nil){
+        [errorLabel setHidden:false];
+        errorLabel.text = error;
+    }
+    
     
 }
 
-- (IBAction)loginAction:(id)sender {
-    //LOGIN og send til mainview
-     [self showFriends];
+- (IBAction)registerAction:(id)sender {
+    [self.indicator setHidden:NO];
+    
+    [self.indicator startAnimating];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [loginController registerUser:self.usernameTextField.text pass:self.passwordTextField.text];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+            [self.indicator stopAnimating];
+            if([loginController hasError]){
+                [self.indicator setHidden:YES];
+                [self errorAnimation];
+                [self showError:self.errorOne errorMsg:[loginController getUsernameError]];
+                [self showError:self.errorTwo errorMsg:[loginController getPasswordError]];
+            }else{
+                [self showFriends];
+            }
+        });
+    });
 }
 @end

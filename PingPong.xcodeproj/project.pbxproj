@@ -34,6 +34,11 @@
 		C5D574C81AB454AC00D2FC37 /* selfie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C5D574C71AB454AC00D2FC37 /* selfie.jpg */; };
 		C5D574CA1AB4573100D2FC37 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D574C91AB4573100D2FC37 /* settings.png */; };
 		C5D574CD1AB45E3800D2FC37 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574CC1AB45E3800D2FC37 /* ComposeViewController.m */; };
+		C5D574D01AB462A400D2FC37 /* ApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574CF1AB462A400D2FC37 /* ApplicationController.m */; };
+		C5D574D31AB4633800D2FC37 /* ParserHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574D21AB4633800D2FC37 /* ParserHelper.m */; };
+		C5D574D61AB463A500D2FC37 /* ApplicationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574D51AB463A500D2FC37 /* ApplicationHelper.m */; };
+		C5D574D91AB463E600D2FC37 /* ConfigHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574D81AB463E600D2FC37 /* ConfigHelper.m */; };
+		C5D574DC1AB4641500D2FC37 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574DB1AB4641500D2FC37 /* LoginController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +95,16 @@
 		C5D574C91AB4573100D2FC37 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = ../../../Downloads/settings.png; sourceTree = "<group>"; };
 		C5D574CB1AB45E3800D2FC37 /* ComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		C5D574CC1AB45E3800D2FC37 /* ComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		C5D574CE1AB462A400D2FC37 /* ApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationController.h; sourceTree = "<group>"; };
+		C5D574CF1AB462A400D2FC37 /* ApplicationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationController.m; sourceTree = "<group>"; };
+		C5D574D11AB4633800D2FC37 /* ParserHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserHelper.h; sourceTree = "<group>"; };
+		C5D574D21AB4633800D2FC37 /* ParserHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserHelper.m; sourceTree = "<group>"; };
+		C5D574D41AB463A500D2FC37 /* ApplicationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationHelper.h; sourceTree = "<group>"; };
+		C5D574D51AB463A500D2FC37 /* ApplicationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationHelper.m; sourceTree = "<group>"; };
+		C5D574D71AB463E500D2FC37 /* ConfigHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigHelper.h; sourceTree = "<group>"; };
+		C5D574D81AB463E600D2FC37 /* ConfigHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigHelper.m; sourceTree = "<group>"; };
+		C5D574DA1AB4641500D2FC37 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
+		C5D574DB1AB4641500D2FC37 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +236,10 @@
 		C5D574971AB43E0C00D2FC37 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C5D574CE1AB462A400D2FC37 /* ApplicationController.h */,
+				C5D574CF1AB462A400D2FC37 /* ApplicationController.m */,
+				C5D574DA1AB4641500D2FC37 /* LoginController.h */,
+				C5D574DB1AB4641500D2FC37 /* LoginController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -232,6 +251,12 @@
 				C5D574AD1AB440A800D2FC37 /* AuthHelper.m */,
 				C5D574AF1AB4467300D2FC37 /* ColorHelper.h */,
 				C5D574B01AB4467300D2FC37 /* ColorHelper.m */,
+				C5D574D11AB4633800D2FC37 /* ParserHelper.h */,
+				C5D574D21AB4633800D2FC37 /* ParserHelper.m */,
+				C5D574D41AB463A500D2FC37 /* ApplicationHelper.h */,
+				C5D574D51AB463A500D2FC37 /* ApplicationHelper.m */,
+				C5D574D71AB463E500D2FC37 /* ConfigHelper.h */,
+				C5D574D81AB463E600D2FC37 /* ConfigHelper.m */,
 			);
 			name = helpers;
 			sourceTree = "<group>";
@@ -357,7 +382,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5D574D01AB462A400D2FC37 /* ApplicationController.m in Sources */,
 				C5D574A11AB43F9C00D2FC37 /* MessageViewController.m in Sources */,
+				C5D574D61AB463A500D2FC37 /* ApplicationHelper.m in Sources */,
 				C5D574AB1AB4406700D2FC37 /* SSKeychainQuery.m in Sources */,
 				C5D574AA1AB4406700D2FC37 /* SSKeychain.m in Sources */,
 				C5D574B11AB4467300D2FC37 /* ColorHelper.m in Sources */,
@@ -367,9 +394,12 @@
 				C5D5749B1AB43F7100D2FC37 /* MainTableViewCell.m in Sources */,
 				C5D574C61AB44D9400D2FC37 /* NavigationViewController.m in Sources */,
 				C5D5749E1AB43F8200D2FC37 /* MainTableViewController.m in Sources */,
+				C5D574D31AB4633800D2FC37 /* ParserHelper.m in Sources */,
+				C5D574D91AB463E600D2FC37 /* ConfigHelper.m in Sources */,
 				C5D574CD1AB45E3800D2FC37 /* ComposeViewController.m in Sources */,
 				C5D5746B1AB4331F00D2FC37 /* main.m in Sources */,
 				C5D574A41AB43FA800D2FC37 /* SettingsViewController.m in Sources */,
+				C5D574DC1AB4641500D2FC37 /* LoginController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

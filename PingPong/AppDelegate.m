@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "AuthHelper.h"
+#import "MainTableViewController.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,9 +20,25 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    AuthHelper *authHelper = [[AuthHelper alloc] init];
+    //[authHelper resetCredentials];
+    NSLog(@"cr %@", [authHelper getAuthToken]);
+    if([authHelper getAuthToken] == nil){
+        [self setView:[[ViewController alloc] init] second:@"login"];
+    }else{
+        //[self setView:[[SearchViewController alloc] init] second:@"search"];
+        [self setView:[[MainTableViewController alloc] init] second:@"friendsNavigation"];
+    }
     return YES;
 }
 
+-(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
+    //self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
+    [self.window makeKeyAndVisible];
+    [self.window.rootViewController presentViewController:controller animated:NO completion:NULL];
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
