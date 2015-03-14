@@ -117,24 +117,15 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="30" y="180" width="346" height="21"/>
-                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJ4-7E-b4Q">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="30" y="209" width="346" height="21"/>
-                                </variation>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cLp-Jd-5rA">
                                 <rect key="frame" x="-10" y="-10" width="20" height="20"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="180" y="280" width="20" height="20"/>
-                                </variation>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -181,26 +172,26 @@
                                 <exclude reference="cLp-Jd-5rA"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="GQ2-m8-H4O"/>
-                                <exclude reference="ddH-RS-BsH"/>
-                                <exclude reference="mcR-K7-B6A"/>
+                                <exclude reference="QtL-39-fou"/>
+                                <exclude reference="ZXi-gJ-ugz"/>
+                                <exclude reference="f4q-Xu-RRM"/>
+                                <exclude reference="pHe-kU-uiU"/>
                                 <exclude reference="Y9A-gK-EBk"/>
                                 <exclude reference="eHH-CQ-K2H"/>
                                 <exclude reference="hYR-hO-cN8"/>
                                 <exclude reference="iGg-HH-o6V"/>
                                 <exclude reference="njL-wY-4e1"/>
+                                <exclude reference="GQ2-m8-H4O"/>
+                                <exclude reference="ddH-RS-BsH"/>
+                                <exclude reference="mcR-K7-B6A"/>
                                 <exclude reference="MJs-BJ-KMn"/>
                                 <exclude reference="VBZ-n2-C51"/>
                                 <exclude reference="ddk-JG-Ak6"/>
-                                <exclude reference="ZXi-gJ-ugz"/>
-                                <exclude reference="f4q-Xu-RRM"/>
-                                <exclude reference="pHe-kU-uiU"/>
                                 <exclude reference="GVN-kb-Ld1"/>
                                 <exclude reference="YKP-da-1gm"/>
-                                <exclude reference="ebX-kA-uVB"/>
                                 <exclude reference="I7O-PH-SY7"/>
                                 <exclude reference="mlM-4q-gi8"/>
-                                <exclude reference="QtL-39-fou"/>
+                                <exclude reference="ebX-kA-uVB"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -214,26 +205,26 @@
                                 <include reference="cLp-Jd-5rA"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="GQ2-m8-H4O"/>
-                                <exclude reference="ddH-RS-BsH"/>
-                                <exclude reference="mcR-K7-B6A"/>
+                                <include reference="QtL-39-fou"/>
+                                <include reference="ZXi-gJ-ugz"/>
+                                <include reference="f4q-Xu-RRM"/>
+                                <include reference="pHe-kU-uiU"/>
                                 <include reference="Y9A-gK-EBk"/>
                                 <exclude reference="eHH-CQ-K2H"/>
                                 <exclude reference="hYR-hO-cN8"/>
                                 <include reference="iGg-HH-o6V"/>
                                 <include reference="njL-wY-4e1"/>
+                                <include reference="GQ2-m8-H4O"/>
+                                <exclude reference="ddH-RS-BsH"/>
+                                <exclude reference="mcR-K7-B6A"/>
                                 <include reference="MJs-BJ-KMn"/>
                                 <include reference="VBZ-n2-C51"/>
                                 <include reference="ddk-JG-Ak6"/>
-                                <include reference="ZXi-gJ-ugz"/>
-                                <include reference="f4q-Xu-RRM"/>
-                                <include reference="pHe-kU-uiU"/>
                                 <include reference="GVN-kb-Ld1"/>
                                 <include reference="YKP-da-1gm"/>
-                                <include reference="ebX-kA-uVB"/>
                                 <include reference="I7O-PH-SY7"/>
                                 <include reference="mlM-4q-gi8"/>
-                                <include reference="QtL-39-fou"/>
+                                <include reference="ebX-kA-uVB"/>
                             </mask>
                         </variation>
                     </view>

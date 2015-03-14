@@ -46,7 +46,7 @@ NSString *passwordError;
     NSDictionary *credentials = @{
                                   @"user":@{
                                           @"username" : username,
-                                          @"password" : password,
+                                          @"password" : password
                                           }
                                   };
     //Create json body from dictionary
