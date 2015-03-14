@@ -14,6 +14,14 @@
 		C5D574761AB4331F00D2FC37 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5D574751AB4331F00D2FC37 /* Images.xcassets */; };
 		C5D574791AB4331F00D2FC37 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5D574771AB4331F00D2FC37 /* LaunchScreen.xib */; };
 		C5D574851AB4331F00D2FC37 /* PingPongTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574841AB4331F00D2FC37 /* PingPongTests.m */; };
+		C5D5749B1AB43F7100D2FC37 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D5749A1AB43F7100D2FC37 /* MainTableViewCell.m */; };
+		C5D5749E1AB43F8200D2FC37 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D5749D1AB43F8200D2FC37 /* MainTableViewController.m */; };
+		C5D574A11AB43F9C00D2FC37 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574A01AB43F9C00D2FC37 /* MessageViewController.m */; };
+		C5D574A41AB43FA800D2FC37 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574A31AB43FA800D2FC37 /* SettingsViewController.m */; };
+		C5D574AA1AB4406700D2FC37 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574A71AB4406700D2FC37 /* SSKeychain.m */; };
+		C5D574AB1AB4406700D2FC37 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574A91AB4406700D2FC37 /* SSKeychainQuery.m */; };
+		C5D574AE1AB440A800D2FC37 /* AuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574AD1AB440A800D2FC37 /* AuthHelper.m */; };
+		C5D574B11AB4467300D2FC37 /* ColorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574B01AB4467300D2FC37 /* ColorHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +48,22 @@
 		C5D5747E1AB4331F00D2FC37 /* PingPongTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PingPongTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5D574831AB4331F00D2FC37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5D574841AB4331F00D2FC37 /* PingPongTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PingPongTests.m; sourceTree = "<group>"; };
+		C5D574991AB43F7100D2FC37 /* MainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewCell.h; sourceTree = "<group>"; };
+		C5D5749A1AB43F7100D2FC37 /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewCell.m; sourceTree = "<group>"; };
+		C5D5749C1AB43F8200D2FC37 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
+		C5D5749D1AB43F8200D2FC37 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
+		C5D5749F1AB43F9C00D2FC37 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		C5D574A01AB43F9C00D2FC37 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		C5D574A21AB43FA800D2FC37 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		C5D574A31AB43FA800D2FC37 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		C5D574A61AB4406700D2FC37 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSKeychain.h; path = ../../wzup/wzup/app/lib/SSKeychain.h; sourceTree = "<group>"; };
+		C5D574A71AB4406700D2FC37 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychain.m; path = ../../wzup/wzup/app/lib/SSKeychain.m; sourceTree = "<group>"; };
+		C5D574A81AB4406700D2FC37 /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSKeychainQuery.h; path = ../../wzup/wzup/app/lib/SSKeychainQuery.h; sourceTree = "<group>"; };
+		C5D574A91AB4406700D2FC37 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychainQuery.m; path = ../../wzup/wzup/app/lib/SSKeychainQuery.m; sourceTree = "<group>"; };
+		C5D574AC1AB440A800D2FC37 /* AuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthHelper.h; sourceTree = "<group>"; };
+		C5D574AD1AB440A800D2FC37 /* AuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthHelper.m; sourceTree = "<group>"; };
+		C5D574AF1AB4467300D2FC37 /* ColorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorHelper.h; sourceTree = "<group>"; };
+		C5D574B01AB4467300D2FC37 /* ColorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +105,12 @@
 		C5D574671AB4331F00D2FC37 /* PingPong */ = {
 			isa = PBXGroup;
 			children = (
+				C5D574A51AB4403800D2FC37 /* lib */,
+				C5D574981AB43E1200D2FC37 /* helpers */,
+				C5D574971AB43E0C00D2FC37 /* controllers */,
+				C5D574961AB43E0700D2FC37 /* views */,
+				C5D574951AB43DFF00D2FC37 /* models */,
+				C5D574941AB43DF600D2FC37 /* res */,
 				C5D5746C1AB4331F00D2FC37 /* AppDelegate.h */,
 				C5D5746D1AB4331F00D2FC37 /* AppDelegate.m */,
 				C5D5746F1AB4331F00D2FC37 /* ViewController.h */,
@@ -117,6 +147,64 @@
 				C5D574831AB4331F00D2FC37 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C5D574941AB43DF600D2FC37 /* res */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = res;
+			sourceTree = "<group>";
+		};
+		C5D574951AB43DFF00D2FC37 /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		C5D574961AB43E0700D2FC37 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				C5D574991AB43F7100D2FC37 /* MainTableViewCell.h */,
+				C5D5749A1AB43F7100D2FC37 /* MainTableViewCell.m */,
+				C5D5749C1AB43F8200D2FC37 /* MainTableViewController.h */,
+				C5D5749D1AB43F8200D2FC37 /* MainTableViewController.m */,
+				C5D5749F1AB43F9C00D2FC37 /* MessageViewController.h */,
+				C5D574A01AB43F9C00D2FC37 /* MessageViewController.m */,
+				C5D574A21AB43FA800D2FC37 /* SettingsViewController.h */,
+				C5D574A31AB43FA800D2FC37 /* SettingsViewController.m */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		C5D574971AB43E0C00D2FC37 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		C5D574981AB43E1200D2FC37 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C5D574AC1AB440A800D2FC37 /* AuthHelper.h */,
+				C5D574AD1AB440A800D2FC37 /* AuthHelper.m */,
+				C5D574AF1AB4467300D2FC37 /* ColorHelper.h */,
+				C5D574B01AB4467300D2FC37 /* ColorHelper.m */,
+			);
+			name = helpers;
+			sourceTree = "<group>";
+		};
+		C5D574A51AB4403800D2FC37 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				C5D574A61AB4406700D2FC37 /* SSKeychain.h */,
+				C5D574A71AB4406700D2FC37 /* SSKeychain.m */,
+				C5D574A81AB4406700D2FC37 /* SSKeychainQuery.h */,
+				C5D574A91AB4406700D2FC37 /* SSKeychainQuery.m */,
+			);
+			name = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,9 +307,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5D574A11AB43F9C00D2FC37 /* MessageViewController.m in Sources */,
+				C5D574AB1AB4406700D2FC37 /* SSKeychainQuery.m in Sources */,
+				C5D574AA1AB4406700D2FC37 /* SSKeychain.m in Sources */,
+				C5D574B11AB4467300D2FC37 /* ColorHelper.m in Sources */,
 				C5D574711AB4331F00D2FC37 /* ViewController.m in Sources */,
 				C5D5746E1AB4331F00D2FC37 /* AppDelegate.m in Sources */,
+				C5D574AE1AB440A800D2FC37 /* AuthHelper.m in Sources */,
+				C5D5749B1AB43F7100D2FC37 /* MainTableViewCell.m in Sources */,
+				C5D5749E1AB43F8200D2FC37 /* MainTableViewController.m in Sources */,
 				C5D5746B1AB4331F00D2FC37 /* main.m in Sources */,
+				C5D574A41AB43FA800D2FC37 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +508,7 @@
 				C5D5748A1AB4331F00D2FC37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C5D5748B1AB4331F00D2FC37 /* Build configuration list for PBXNativeTarget "PingPongTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +517,7 @@
 				C5D5748D1AB4331F00D2FC37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
