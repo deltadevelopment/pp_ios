@@ -1,25 +1,31 @@
 //
-//  MessageViewController.m
+//  NavigationViewController.m
 //  PingPong
 //
 //  Created by Simen Lie on 14/03/15.
 //  Copyright (c) 2015 ddev. All rights reserved.
 //
 
-#import "MessageViewController.h"
+#import "NavigationViewController.h"
 
-@interface MessageViewController ()
+@interface NavigationViewController ()
 
 @end
 
-@implementation MessageViewController
+@implementation NavigationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationItem.rightBarButtonItem setBackgroundImage:[UIImage imageNamed:@"settings.png"] forState:UIControlStateNormal barMetrics:nil];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:17] }];
+    
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -7,7 +7,6 @@
 //
 
 #import "ColorHelper.h"
-#import <UIKit/UIKit.h>
 
 @implementation ColorHelper
 NSArray* colors;

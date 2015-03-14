@@ -188,32 +188,46 @@
             </objects>
             <point key="canvasLocation" x="-354" y="286.5"/>
         </scene>
-        <!--Main Table View Controller-->
+        <!--Ping Pong-->
         <scene sceneID="Lvw-vN-WXn">
             <objects>
                 <tableViewController storyboardIdentifier="friendsList" id="9px-I4-t5Z" customClass="MainTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="pD4-wv-ZTR">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.5568627451" green="0.2666666667" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="75" id="vUW-fL-3ew" customClass="MainTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendCell" rowHeight="75" id="vUW-fL-3ew" customClass="MainTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vUW-fL-3ew" id="hhA-53-iSd">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JcO-zP-BNB">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera.png" translatesAutoresizingMaskIntoConstraints="NO" id="JcO-zP-BNB">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                            <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                                <rect key="frame" x="300" y="21" width="83" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="3J6-po-PkB"/>
+                                                <constraint firstAttribute="width" constant="40" id="cLy-9L-76u"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="3J6-po-PkB"/>
+                                                    <exclude reference="cLy-9L-76u"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="343" y="22" width="40" height="39"/>
+                                                <mask key="constraints">
+                                                    <include reference="3J6-po-PkB"/>
+                                                    <include reference="cLy-9L-76u"/>
+                                                </mask>
                                             </variation>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nqd-iL-VgN">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="28" y="27" width="42" height="21"/>
+                                                <rect key="frame" x="28" y="28" width="42" height="21"/>
                                             </variation>
                                         </label>
                                     </subviews>
@@ -248,9 +262,10 @@
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <outlet property="iconImage" destination="JcO-zP-BNB" id="sSI-cN-L9k"/>
-                                    <outlet property="nameLabel" destination="Nqd-iL-VgN" id="IWP-fz-K4T"/>
+                                    <outlet property="iconImage" destination="JcO-zP-BNB" id="4H1-co-22V"/>
+                                    <outlet property="nameLabel" destination="Nqd-iL-VgN" id="Ij9-h7-ybE"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -259,16 +274,26 @@
                             <outlet property="delegate" destination="9px-I4-t5Z" id="63F-yJ-XO8"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="CDw-2Y-qYK"/>
+                    <navigationItem key="navigationItem" title="Ping Pong" id="CDw-2Y-qYK">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="O1Y-Cw-ZbO">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="JCI-De-lDA">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="50X-qg-xLr" kind="show" id="L8j-LD-EwU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZeH-NB-jbB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1132.5" y="285.75"/>
+            <point key="canvasLocation" x="1132.5" y="285"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="fY0-QE-Mgi">
             <objects>
-                <viewController id="50X-qg-xLr" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="settings" id="50X-qg-xLr" customClass="SettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tnl-DQ-uk3"/>
                         <viewControllerLayoutGuide type="bottom" id="8pr-OX-ew7"/>
@@ -280,33 +305,102 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fiQ-U1-e8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="904.5" y="958.5"/>
+            <point key="canvasLocation" x="1132.5" y="1004.25"/>
         </scene>
-        <!--View Controller-->
+        <!--Message View Controller-->
         <scene sceneID="9C6-WJ-Anu">
             <objects>
-                <viewController id="kaV-Df-epf" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="friend" id="kaV-Df-epf" customClass="MessageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="khs-E2-zeS"/>
                         <viewControllerLayoutGuide type="bottom" id="WqT-JN-ydG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rHg-fE-A6f">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selfie.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JpW-bM-KRq">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
+                                </variation>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Blir du med på byen en tur senere?" translatesAutoresizingMaskIntoConstraints="NO" id="jXk-Ct-qPN">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="70"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="27" y="50" width="357" height="572"/>
+                                </variation>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JpW-bM-KRq" firstAttribute="height" secondItem="rHg-fE-A6f" secondAttribute="height" id="1Pl-F6-yPf"/>
+                            <constraint firstAttribute="height" secondItem="jXk-Ct-qPN" secondAttribute="height" id="1mP-AS-jrP"/>
+                            <constraint firstAttribute="width" secondItem="jXk-Ct-qPN" secondAttribute="width" id="5Zm-Ez-2HW"/>
+                            <constraint firstItem="jXk-Ct-qPN" firstAttribute="top" secondItem="khs-E2-zeS" secondAttribute="bottom" constant="30" id="ADM-WO-TKd"/>
+                            <constraint firstItem="WqT-JN-ydG" firstAttribute="top" secondItem="jXk-Ct-qPN" secondAttribute="bottom" constant="178" id="NdF-69-QCk"/>
+                            <constraint firstAttribute="width" secondItem="jXk-Ct-qPN" secondAttribute="width" id="Sjh-xl-8to"/>
+                            <constraint firstAttribute="height" secondItem="jXk-Ct-qPN" secondAttribute="height" id="TCK-oD-nCW"/>
+                            <constraint firstItem="jXk-Ct-qPN" firstAttribute="trailing" secondItem="rHg-fE-A6f" secondAttribute="trailingMargin" id="Zxe-Ow-FAa"/>
+                            <constraint firstItem="JpW-bM-KRq" firstAttribute="width" secondItem="rHg-fE-A6f" secondAttribute="width" id="o9r-CU-2kG"/>
+                            <constraint firstItem="jXk-Ct-qPN" firstAttribute="leading" secondItem="rHg-fE-A6f" secondAttribute="leadingMargin" constant="11" id="w97-lT-68X"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="JpW-bM-KRq"/>
+                                <exclude reference="jXk-Ct-qPN"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="1mP-AS-jrP"/>
+                                <exclude reference="5Zm-Ez-2HW"/>
+                                <exclude reference="ADM-WO-TKd"/>
+                                <exclude reference="Sjh-xl-8to"/>
+                                <exclude reference="TCK-oD-nCW"/>
+                                <exclude reference="Zxe-Ow-FAa"/>
+                                <exclude reference="w97-lT-68X"/>
+                                <exclude reference="1Pl-F6-yPf"/>
+                                <exclude reference="o9r-CU-2kG"/>
+                                <exclude reference="NdF-69-QCk"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="JpW-bM-KRq"/>
+                                <include reference="jXk-Ct-qPN"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="1mP-AS-jrP"/>
+                                <exclude reference="5Zm-Ez-2HW"/>
+                                <exclude reference="ADM-WO-TKd"/>
+                                <include reference="Sjh-xl-8to"/>
+                                <include reference="TCK-oD-nCW"/>
+                                <exclude reference="Zxe-Ow-FAa"/>
+                                <exclude reference="w97-lT-68X"/>
+                                <include reference="1Pl-F6-yPf"/>
+                                <include reference="o9r-CU-2kG"/>
+                                <exclude reference="NdF-69-QCk"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BKf-de-1tk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2470.5" y="286.5"/>
+            <point key="canvasLocation" x="1825.5" y="286.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation View Controller-->
         <scene sceneID="vWb-7a-dp0">
             <objects>
-                <navigationController storyboardIdentifier="friends" automaticallyAdjustsScrollViewInsets="NO" id="aOB-qe-HpY" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="friendsNavigation" automaticallyAdjustsScrollViewInsets="NO" id="aOB-qe-HpY" customClass="NavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oyw-uU-0hL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="oyw-uU-0hL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.59607843140000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="0.59607843137254901" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -318,4 +412,8 @@
             <point key="canvasLocation" x="334.5" y="286.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera.png" width="500" height="500"/>
+        <image name="selfie.jpg" width="500" height="643"/>
+    </resources>
 </document>

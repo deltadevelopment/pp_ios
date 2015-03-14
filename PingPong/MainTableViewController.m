@@ -7,21 +7,53 @@
 //
 
 #import "MainTableViewController.h"
+#import "MainTableViewCell.h"
+#import "ColorHelper.h"
+#import "SettingsViewController.h"
+#import "MessageViewController.h"
 
 @interface MainTableViewController ()
 
 @end
 
 @implementation MainTableViewController
+NSMutableArray *friends;
+ColorHelper* colorHelper;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+      NSLog(@"start");
+    friends = [[NSMutableArray alloc] initWithObjects:@"Roger",@"Simen", @"Chris", @"Frode", @"Christian", nil];
+    self.tableView.allowsSelection = NO;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    colorHelper = [[ColorHelper alloc] init];
+    [colorHelper initColors];
+    self.tableView.separatorColor = [UIColor clearColor];
+    
+    UIImage* image3 = [UIImage imageNamed:@"settings.png"];
+    CGRect frameimg = CGRectMake(0, 0, 20, 20);
+    UIButton *someButton = [[UIButton alloc] initWithFrame:frameimg];
+    [someButton setBackgroundImage:image3 forState:UIControlStateNormal];
+    [someButton addTarget:self action:@selector(showSettings)
+         forControlEvents:UIControlEventTouchUpInside];
+    [someButton setShowsTouchWhenHighlighted:YES];
+    
+    UIBarButtonItem *mailbutton =[[UIBarButtonItem alloc] initWithCustomView:someButton];
+    self.navigationItem.rightBarButtonItem=mailbutton;
+    
+    
+    
+   // self.navigationItem.leftBarButtonItem
+    
+}
+
+-(void)showSettings{
+    SettingsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"settings"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,26 +64,42 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [friends count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"friendCell";
+    MainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
-    
+    if(cell == nil){
+        cell = [[MainTableViewCell  alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
+    }
+    cell.nameLabel.text = [friends objectAtIndex:indexPath.row];
+    cell.backgroundColor = [colorHelper getColor];
+    [cell iconImage].userInteractionEnabled =YES;
+    UITapGestureRecognizer *tapGr;
+    tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMessage:)];
+    tapGr.numberOfTapsRequired = 1;
+    [tapGr setCancelsTouchesInView: YES];
+    //[tapGr setDelegate: self];
+    [[cell iconImage] addGestureRecognizer:tapGr];
+
     return cell;
 }
-*/
+
+
+-(void)showMessage:(UITapGestureRecognizer *) sender{
+    NSLog(@"show");
+    MessageViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friend"];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 /*
 // Override to support conditional editing of the table view.

@@ -131,7 +131,7 @@
     [self presentViewController:controller animated:NO completion:NULL];
 }
 -(void)showFriends{
-[self setView:[[MainTableViewController alloc] init] second:@"friendsList"];
+    [self setView:[[MainTableViewController alloc] init] second:@"friendsNavigation"];
 }
 
 - (IBAction)login:(id)sender {
