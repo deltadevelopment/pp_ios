@@ -8,18 +8,41 @@
 
 #import "ComposeViewController.h"
 #import "CameraHelper.h"
+#import "MessageController.h"
+#import "FriendModel.h"
 @interface ComposeViewController ()
 
 @end
 
 @implementation ComposeViewController
 CameraHelper *cameraHelper;
+MessageController *messageController;
+FriendModel *currentFriend;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UISwipeGestureRecognizer *swipeRightGesture2=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(sendMessage)];
+    swipeRightGesture2.direction=UISwipeGestureRecognizerDirectionLeft;
+    swipeRightGesture2.numberOfTouchesRequired = 1;
+    [self.textView addGestureRecognizer:swipeRightGesture2];
+    
+    messageController = [[MessageController alloc] init];
+   
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      [messageController generateImageUrl];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+            
+        });
+        
+    });
+    
+    
     cameraHelper = [[CameraHelper alloc] init];
     [self.textView becomeFirstResponder];
     self.textView.delegate = self;
-    int random = rand()%4;
+    int random = rand()%6;
     float value =[[NSNumber numberWithInt:random] floatValue];
     [cameraHelper initializeCamera:self.cameraView];
 
@@ -29,6 +52,20 @@ CameraHelper *cameraHelper;
                                    userInfo:nil
                                     repeats:NO];
     // Do any additional setup after loading the view.
+}
+
+-(void)sendMessage{
+//
+    NSLog(@"Send message here");
+    //STEP 1
+    [messageController uploadImage:[cameraHelper getImageAsData]];
+    
+    //STEP 2
+   [messageController sendMessageToUser:[currentFriend userId] message:self.textView.text];
+}
+
+-(void)setFriend:(FriendModel*) friend{
+    currentFriend = friend;
 }
 
 -(void)takePicture{

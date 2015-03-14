@@ -13,6 +13,7 @@
 #import "MessageViewController.h"
 #import "FriendsController.h"
 #import "FriendModel.h"
+#import "ComposeViewController.h"
 @interface MainTableViewController ()
 
 @end
@@ -40,6 +41,18 @@ UIBarButtonItem *currentRight;
     [friendsController initFriends];
     [friendsController initFriendRequests];
     [super viewDidLoad];
+    
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor purpleColor];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(getLatestFriends)
+                  forControlEvents:UIControlEventValueChanged];
+
+    
+    
+    
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
       NSLog(@"start");
    // friends = [[NSMutableArray alloc] initWithObjects:@"Roger",@"Simen", @"Chris", @"Frode", @"Christian", nil];
@@ -76,6 +89,27 @@ UIBarButtonItem *currentRight;
     
 }
 
+- (void)getLatestFriends {
+    [friendsController initFriends];
+    [friendsController initFriendRequests];
+    friends = [friendsController getFriends];
+    friendRequests = [friendsController getFriendRequests];
+    if([friendRequests count] != 0){
+        sections = 2;
+    }
+    [self.tableView reloadData];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM d, h:mm a"];
+    NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+    NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                forKey:NSForegroundColorAttributeName];
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+    self.refreshControl.attributedTitle = attributedTitle;
+    [self.refreshControl endRefreshing];
+    
+    
+}
+
 -(void)testSelector{
     NSLog(@"testSELector");
 }
@@ -84,10 +118,7 @@ UIBarButtonItem *currentRight;
 
 -(void)showSettings{
     SettingsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"settings"];
-    
-    
-    
-    
+
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -149,6 +180,9 @@ UIBarButtonItem *currentRight;
         }
     }else{
         FriendModel *friendRequest =[friendRequests objectAtIndex:indexPath.row];
+        if([friendRequest isRequester]){
+         //Ikke vis
+        }
         cell.nameLabel.text = [friendRequest username];
         cell.backgroundColor = [colorHelper getColor];
         [cell iconImage].userInteractionEnabled =YES;
@@ -173,15 +207,24 @@ UIBarButtonItem *currentRight;
 {
     
     MessageViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friend"];
-    
+    ComposeViewController *vc2 = [self.storyboard instantiateViewControllerWithIdentifier:@"compose"];
     if(path.section == 0){
         FriendModel *friendModel = [friends objectAtIndex:path.row];
         [vc setFriend:friendModel];
+        [vc2 setFriend:friendModel];
+        self.navigationItem.backBarButtonItem =
+        [[UIBarButtonItem alloc] initWithTitle:@""
+                                         style:UIBarButtonItemStyleBordered
+                                        target:nil
+                                        action:nil];
+        
+        
     }else{
         FriendModel *friendModel = [friendRequests objectAtIndex:path.row];
         [vc setFriend:friendModel];
     }
-    [self.navigationController pushViewController:vc animated:YES];
+   // [self.navigationController pushViewController:vc animated:YES];
+     [self.navigationController pushViewController:vc2 animated:YES];
 
 }
 

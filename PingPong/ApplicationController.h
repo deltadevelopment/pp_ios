@@ -10,6 +10,7 @@
 #import "ParserHelper.h"
 #import "AuthHelper.h"
 #import "ApplicationHelper.h"
+#import <UIKit/UIKit.h>
 
 @interface ApplicationController : NSObject<NSURLConnectionDataDelegate>{
     AuthHelper *authHelper;

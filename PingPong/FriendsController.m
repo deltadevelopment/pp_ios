@@ -32,12 +32,11 @@ FriendModel *addedFriend;
 
 }
 -(void)initFriendRequests{
-   
     friendRequests = [[NSMutableArray alloc] init];
     NSString *url = [NSString stringWithFormat:@"user/%@/friend_requests", [authHelper getUserId]];
     NSData *response = [self getHttpRequest:url];
-    //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    //NSLog(@"HER: %@",strdata);
+    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    NSLog(@"HER: %@",strdata);
     ParserHelper* parserHelper = [[ParserHelper alloc] init];
     NSMutableDictionary *dic2 = [parserHelper parse:response];
     NSArray *friendsRaw = dic2[@"friends"];
@@ -54,17 +53,24 @@ FriendModel *addedFriend;
 }
 
 -(NSMutableArray *)getFriendRequests{
-    return friendRequests;
+    NSMutableArray *friendRequests2;
+    for(FriendModel *friend in friendRequests){
+        if(![friend isRequester]){
+            [friendRequests2 addObject:friend];
+        }
+    }
+    
+    return friendRequests2;
 }
 
 -(void)deleteFriend:(NSString *) userId withSuccess:(SEL) success andObject:(NSObject *) object{
     NSData *response2 = [self deleteHttpRequest:[NSString stringWithFormat:@"user/%@/friend/%@", [authHelper getUserId], userId]];
     NSMutableDictionary *dic = [parserHelper parse:response2];
-[object performSelector:success];
+    [object performSelector:success];
 }
 
 -(void)acceptFriendRequestFromUser:(NSString *) userId withSucess:(SEL)success andObject: (NSObject *) object{
-///user/#{id}/accept_friend/#{friend_id}
+    ///user/#{id}/accept_friend/#{friend_id}
     NSData *response2 = [self postHttpRequest:[NSString stringWithFormat:@"user/%@/accept_friend/%@", [authHelper getUserId], userId]  json:nil];
     NSMutableDictionary *dic = [parserHelper parse:response2];
     

@@ -18,6 +18,14 @@
 LoginController* loginController;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog([[UIDevice currentDevice] name]);
+    NSString *name = [[UIDevice currentDevice] name];
+    if(![name isEqualToString:@"Simen sin iPhone"]){
+        self.usernameTextField.text = @"christiandalsvaag";
+        self.passwordTextField.text = @"christiandalsvaag";
+    }
+
     loginController = [[LoginController alloc] init];
     [self addLine:self.usernameTextField];
     [self addLine:self.passwordTextField];
@@ -28,6 +36,8 @@ LoginController* loginController;
     [self setTextFieldStyle:self.usernameTextField];
     [self setTextFieldStyle:self.passwordTextField];
     self.indicator.hidden = YES;
+    self.errorOne.hidden = YES;
+    self.errorTwo.hidden = YES;
    // self.loginButton.hidden = YES;
     [self.usernameTextField addTarget:self
                                action:@selector(textFieldDidChange:)
@@ -187,8 +197,12 @@ LoginController* loginController;
                 [self errorAnimation];
                 [self showError:self.errorOne errorMsg:[loginController getUsernameError]];
                 [self showError:self.errorTwo errorMsg:[loginController getPasswordError]];
+                self.errorOne.hidden = NO;
+                self.errorTwo.hidden = NO;
             }else{
                 [self showFriends];
+                self.errorOne.hidden = YES;
+                self.errorTwo.hidden = YES;
             }
         });
     });

@@ -56,16 +56,18 @@ NSString *passwordError;
     NSData *response = [self postHttpRequest:@"register"  json:jsonData];
     //Parse login request
     NSMutableDictionary *dic = [parserHelper parse:response];
-    NSArray *usernameErrorArray = dic[@"username"];
-    NSArray *passwordErrorArray = dic[@"password"];
-    NSArray *emailErrorArray = dic[@"email"];
+    NSMutableDictionary *dic2 = dic[@"errors"];
+    NSArray *usernameErrorArray = dic2[@"username"];
+    NSArray *passwordErrorArray = dic2[@"password"];
+    NSArray *emailErrorArray = dic2[@"email"];
     usernameError =usernameErrorArray[0];
     emailError = emailErrorArray[0];
     passwordError = passwordErrorArray[0];
     
+    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    NSLog(@"HER: %@",strdata);
     
-    
-    //  NSLog(usernameError[0]);
+    //NSLog(usernameError);
     //  NSLog(passwordError[0]);
     // NSLog(emailError[0]);
 };

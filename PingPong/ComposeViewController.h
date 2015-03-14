@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FriendModel.h"
 @interface ComposeViewController : UIViewController<UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *cameraView;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+-(void)setFriend:(FriendModel*) friend;
 
 @end

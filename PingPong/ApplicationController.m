@@ -8,6 +8,7 @@
 
 #import "ApplicationController.h"
 #import "ApplicationHelper.h"
+#import "ViewController.h"
 
 
 @implementation ApplicationController
@@ -23,6 +24,19 @@
         applicationHelper = [[ApplicationHelper alloc] init];
     }
     return self;
+}
+
+-(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
+    //self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
+  
+    
+    UIViewController *root = [[[[UIApplication sharedApplication] windows] objectAtIndex:0] rootViewController];
+ 
+    [root presentViewController: controller animated:YES completion:nil];
+    
+    
 }
 
 -(NSData*)getResp:(NSMutableURLRequest *) request{
@@ -42,6 +56,7 @@
     }else if([httpResponse statusCode] == 403 ){
         //[authHelper resetCredentials];
         [authHelper resetCredentials];
+        [self setView:[[ViewController alloc] init] second:@"login"];
         isErrors = true;
     }
     else{
@@ -98,5 +113,50 @@
     return [self getResp:serviceRequest];
     
 };
+
+-(void)puttHttpRequestWithImage:(NSData *) imageData token:(NSString *) token{
+    //POST/PUT to Amazon
+    //STEP 2: Upload image to S3 with generated token from backend
+    
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[imageData length]];
+    
+    // Init the URLRequest
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"PUT"];
+    [request setURL:[NSURL URLWithString:token]];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    [request setHTTPBody:imageData];
+    NSLog(@"token is --- %@", token);
+    
+    
+    NSURLConnection * connection2 = [[NSURLConnection alloc]
+                                     initWithRequest:request
+                                     delegate:self startImmediately:NO];
+    
+    [connection2 scheduleInRunLoop:[NSRunLoop mainRunLoop]
+                           forMode:NSDefaultRunLoopMode];
+    
+    [connection2 start];
+    if (connection2) {
+        NSLog(@"connection---");
+    };
+    
+}
+
+- (void)connection:(NSURLConnection *)connection
+   didSendBodyData:(NSInteger)bytesWritten
+ totalBytesWritten:(NSInteger)totalBytesWritten
+totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
+    long percentageDownloaded = (totalBytesWritten * 100)/totalBytesExpectedToWrite;
+    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenBound.size;
+    CGFloat screenWidth = screenSize.width;
+    CGFloat screenHeight = screenSize.height;
+
+    NSLog(@"Skrevet %ld av totalt %ld percentage %d", (long)totalBytesWritten, (long)totalBytesExpectedToWrite, percentageDownloaded);
+}
+
 
 @end

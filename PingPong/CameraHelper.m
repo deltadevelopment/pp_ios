@@ -130,20 +130,23 @@ UIImage *imgTaken;
         
         if (imageSampleBuffer != NULL) {
             NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
-            imgTakenData = imageData;
+            //imgTakenData = imageData;
             imgTaken = [UIImage imageWithData:imageData];
             
             CGSize size = CGSizeMake(screenWidth, screenHeight);
-            
+            NSLog(@"%f", screenHeight);
+            //UIImageView *imgView2 =[[UIImageView alloc] initWithFrame:CGRectMake(0,100, screenWidth,screenHeight)];
+            //imgView2.image = [self imageByScalingAndCroppingForSize:size img:imgTaken];
             UIImageView *imgView = [[UIImageView alloc] initWithImage:[self imageByScalingAndCroppingForSize:size img:imgTaken]];
             view2.hidden = NO;
             [view2 insertSubview:imgView atIndex:0];
-            CGRect cropRect = CGRectMake(0 ,0 ,480 ,640);
+            CGRect cropRect = CGRectMake(0 ,0 ,screenWidth ,screenHeight);
             UIGraphicsBeginImageContextWithOptions(cropRect.size, view, 1.0f);
             [imgTaken drawInRect:cropRect];
             UIImage * customScreenShot = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             NSData* data = UIImagePNGRepresentation(customScreenShot);
+            imgTakenData = data;
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 //[feedController sendImageToServer:data];
                 

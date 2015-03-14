@@ -42,6 +42,7 @@
 		C5D574E11AB488F300D2FC37 /* FriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574E01AB488F300D2FC37 /* FriendsController.m */; };
 		C5D574E41AB4A07200D2FC37 /* CameraHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574E31AB4A07200D2FC37 /* CameraHelper.m */; };
 		C5D574E71AB4AF0400D2FC37 /* FriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574E61AB4AF0400D2FC37 /* FriendModel.m */; };
+		C5D574EA1AB4D83A00D2FC37 /* MessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574E91AB4D83A00D2FC37 /* MessageController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,8 @@
 		C5D574E31AB4A07200D2FC37 /* CameraHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraHelper.m; sourceTree = "<group>"; };
 		C5D574E51AB4AF0400D2FC37 /* FriendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendModel.h; sourceTree = "<group>"; };
 		C5D574E61AB4AF0400D2FC37 /* FriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendModel.m; sourceTree = "<group>"; };
+		C5D574E81AB4D83A00D2FC37 /* MessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageController.h; sourceTree = "<group>"; };
+		C5D574E91AB4D83A00D2FC37 /* MessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +256,8 @@
 				C5D574DB1AB4641500D2FC37 /* LoginController.m */,
 				C5D574DF1AB488F300D2FC37 /* FriendsController.h */,
 				C5D574E01AB488F300D2FC37 /* FriendsController.m */,
+				C5D574E81AB4D83A00D2FC37 /* MessageController.h */,
+				C5D574E91AB4D83A00D2FC37 /* MessageController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -412,6 +417,7 @@
 				C5D574C61AB44D9400D2FC37 /* NavigationViewController.m in Sources */,
 				C5D574E71AB4AF0400D2FC37 /* FriendModel.m in Sources */,
 				C5D5749E1AB43F8200D2FC37 /* MainTableViewController.m in Sources */,
+				C5D574EA1AB4D83A00D2FC37 /* MessageController.m in Sources */,
 				C5D574D31AB4633800D2FC37 /* ParserHelper.m in Sources */,
 				C5D574D91AB463E600D2FC37 /* ConfigHelper.m in Sources */,
 				C5D574CD1AB45E3800D2FC37 /* ComposeViewController.m in Sources */,
@@ -540,6 +546,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PingPong/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -550,6 +557,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PingPong/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

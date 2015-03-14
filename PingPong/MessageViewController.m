@@ -9,6 +9,7 @@
 #import "MessageViewController.h"
 #import "ComposeViewController.h"
 #import "FriendModel.h"
+#import "MessageController.h"
 
 @interface MessageViewController ()
 
@@ -17,9 +18,11 @@
 @implementation MessageViewController
 ComposeViewController *composeViewController;
 FriendModel *currentFriend;
+MessageController* messageController;
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.imageRecieved.userInteractionEnabled =YES;
+    self.imageRecieved.userInteractionEnabled =YES;
+    messageController =[[MessageController alloc] init];
     UISwipeGestureRecognizer *swipeRightGesture=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGestureRight)];
     swipeRightGesture.direction=UISwipeGestureRecognizerDirectionRight;
     swipeRightGesture.numberOfTouchesRequired = 1;
@@ -29,9 +32,14 @@ FriendModel *currentFriend;
     swipeRightGesture2.direction=UISwipeGestureRecognizerDirectionLeft;
     swipeRightGesture2.numberOfTouchesRequired = 1;
     [self.textRecieved addGestureRecognizer:swipeRightGesture2];
-    
+    //[self sendMessage];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
-    [self.navigationItem.rightBarButtonItem setBackgroundImage:[UIImage imageNamed:@"settings.png"] forState:UIControlStateNormal barMetrics:nil];
+    // [self.navigationItem.rightBarButtonItem setBackgroundImage:[UIImage imageNamed:@"settings.png"] forState:UIControlStateNormal barMetrics:nil];
+}
+
+-(void)sendMessage{
+    [messageController sendMessageToUser:@"4" message:@"Hei hei"];
 }
 
 -(void)setFriend:(FriendModel*) friend{
