@@ -14,7 +14,7 @@
     _userId = dic[@"id"];
     _username = dic[@"username"];
     _isRequester = [[dic objectForKey:@"is_requester"] boolValue];
-    //NSLog(_username);
+    
     
 };
 @end

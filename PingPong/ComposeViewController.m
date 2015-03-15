@@ -10,6 +10,7 @@
 #import "CameraHelper.h"
 #import "MessageController.h"
 #import "FriendModel.h"
+#import "MessageModel.h"
 @interface ComposeViewController ()
 
 @end
@@ -18,6 +19,8 @@
 CameraHelper *cameraHelper;
 MessageController *messageController;
 FriendModel *currentFriend;
+MessageModel *currentMessage;
+bool shouldSendNew;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -27,7 +30,7 @@ FriendModel *currentFriend;
     [self.textView addGestureRecognizer:swipeRightGesture2];
     
     messageController = [[MessageController alloc] init];
-   
+    //[messageController getMessageFromUser:@"6"];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
       [messageController generateImageUrl];
@@ -54,18 +57,35 @@ FriendModel *currentFriend;
     // Do any additional setup after loading the view.
 }
 
+-(void)setShouldSendNew:(BOOL) should{
+    shouldSendNew = should;
+}
+
 -(void)sendMessage{
 //
     NSLog(@"Send message here");
-    //STEP 1
-    [messageController uploadImage:[cameraHelper getImageAsData]];
+ 
     
     //STEP 2
-   [messageController sendMessageToUser:[currentFriend userId] message:self.textView.text];
+  // [messageController sendMessageToUser:[currentFriend userId] message:self.textView.text];
+    if(shouldSendNew){
+        //STEP 1
+        //[messageController uploadImage:[cameraHelper getImageAsData]];
+        [messageController sendMessageToUserWithImage:[currentFriend userId] message:self.textView.text imgData:[cameraHelper getImageAsData]];
+       
+    }else{
+        [messageController replyToUser:[currentMessage Id] message:self.textView.text];
+        [messageController replyToUserWithImage:[currentMessage Id] message:self.textView.text image:[cameraHelper getImageAsData]];
+    }
+   
 }
 
 -(void)setFriend:(FriendModel*) friend{
     currentFriend = friend;
+}
+
+-(void)setMessageFriend:(MessageModel*) message{
+    currentMessage = message;
 }
 
 -(void)takePicture{

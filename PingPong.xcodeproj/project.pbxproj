@@ -43,6 +43,7 @@
 		C5D574E41AB4A07200D2FC37 /* CameraHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574E31AB4A07200D2FC37 /* CameraHelper.m */; };
 		C5D574E71AB4AF0400D2FC37 /* FriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574E61AB4AF0400D2FC37 /* FriendModel.m */; };
 		C5D574EA1AB4D83A00D2FC37 /* MessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574E91AB4D83A00D2FC37 /* MessageController.m */; };
+		C5D574ED1AB500B600D2FC37 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574EC1AB500B600D2FC37 /* MessageModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,8 @@
 		C5D574E61AB4AF0400D2FC37 /* FriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendModel.m; sourceTree = "<group>"; };
 		C5D574E81AB4D83A00D2FC37 /* MessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageController.h; sourceTree = "<group>"; };
 		C5D574E91AB4D83A00D2FC37 /* MessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageController.m; sourceTree = "<group>"; };
+		C5D574EB1AB500B600D2FC37 /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
+		C5D574EC1AB500B600D2FC37 /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +227,8 @@
 			children = (
 				C5D574E51AB4AF0400D2FC37 /* FriendModel.h */,
 				C5D574E61AB4AF0400D2FC37 /* FriendModel.m */,
+				C5D574EB1AB500B600D2FC37 /* MessageModel.h */,
+				C5D574EC1AB500B600D2FC37 /* MessageModel.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -413,6 +418,7 @@
 				C5D574711AB4331F00D2FC37 /* ViewController.m in Sources */,
 				C5D5746E1AB4331F00D2FC37 /* AppDelegate.m in Sources */,
 				C5D574AE1AB440A800D2FC37 /* AuthHelper.m in Sources */,
+				C5D574ED1AB500B600D2FC37 /* MessageModel.m in Sources */,
 				C5D5749B1AB43F7100D2FC37 /* MainTableViewCell.m in Sources */,
 				C5D574C61AB44D9400D2FC37 /* NavigationViewController.m in Sources */,
 				C5D574E71AB4AF0400D2FC37 /* FriendModel.m in Sources */,

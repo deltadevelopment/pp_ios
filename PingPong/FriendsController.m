@@ -8,11 +8,13 @@
 
 #import "FriendsController.h"
 #import "FriendModel.h"
+#import "MessageModel.h"
 
 @implementation FriendsController
 NSMutableArray *friends;
 NSMutableArray *friendRequests;
 FriendModel *addedFriend;
+NSMutableArray *messages;
 
 -(void)initFriends{
     friends = [[NSMutableArray alloc] init];
@@ -41,7 +43,7 @@ FriendModel *addedFriend;
     NSMutableDictionary *dic2 = [parserHelper parse:response];
     NSArray *friendsRaw = dic2[@"friends"];
     for(NSMutableDictionary* friendRaw in friendsRaw){
-        
+        NSLog(@"friendRequests");
         FriendModel *friend = [[FriendModel alloc] init];
         [friend build:friendRaw[@"user"]];
         [friendRequests addObject:friend];
@@ -53,7 +55,7 @@ FriendModel *addedFriend;
 }
 
 -(NSMutableArray *)getFriendRequests{
-    NSMutableArray *friendRequests2;
+    NSMutableArray *friendRequests2 = [[NSMutableArray alloc] init];
     for(FriendModel *friend in friendRequests){
         if(![friend isRequester]){
             [friendRequests2 addObject:friend];
@@ -110,12 +112,59 @@ FriendModel *addedFriend;
         //NSString *strdata=[[NSString alloc]initWithData:response2 encoding:NSUTF8StringEncoding];
         //NSLog(strdata);
     }
-
-
     
+}
 
+-(void)test{
+    //GET friend with username
+    NSLog(@"test");
+    messages = [[NSMutableArray alloc] init];
+    NSData *response = [self getHttpRequest:[NSString stringWithFormat:@"user/%@/messages", [authHelper getUserId]]];
+    ParserHelper* parserHelper = [[ParserHelper alloc] init];
+    NSMutableDictionary *dic2 = [parserHelper parse:response];
+    NSMutableArray *rawData = dic2[@"messages"];
+    for(NSMutableDictionary *rawMessage in rawData){
+        MessageModel*message = [[MessageModel alloc] init];
+        [message build:rawMessage];
+        [messages addObject:message];
+    }
+  
     
+    for(MessageModel *message in messages){
+        for(FriendModel *friend in friends){
+            NSLog(@"friend: %@ message: %@", [friend userId], [[message user] userId]);
+            if([[friend userId] intValue] == [[[message user] userId ] intValue]){
+            //Dette er venn som du har melding med
+               NSLog(@"friend: %@ message: %@", [message sender_id], [authHelper getUserId]);
+                if([[message sender_id] intValue] != [[authHelper getUserId] intValue]){
+                    //IKKe deg selv. vis konvolutt
+                    friend.type = 1;
+                    
+                   
+                }else if([[message sender_id] intValue] == [[authHelper getUserId] intValue]){
+                    //Er deg selv som har sendt bilde
+                    NSLog(@"du har sendt");
+                    if([[message media_type] intValue] == 1){
+                        NSLog(@"du har sendt");
+                          friend.type = 2;
+                        //Bilde du har sendt
+                    }
+                    else{
+                    //video du har sendt
+                        friend.type = 3;
+                    }
+                    
+                }
+                
+                
+            }
+           
+        }
     
+    }
+
+    //http://p1ngp0ng.herokuapp.com/user/2/messages
+
 }
 
 

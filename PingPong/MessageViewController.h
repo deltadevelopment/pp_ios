@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "FriendModel.h"
+#import "MessageController.h"
 @interface MessageViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *imageRecieved;
 @property (weak, nonatomic) IBOutlet UITextView *textRecieved;
--(void)setFriend:(FriendModel*) friend;
-
+@property (strong, nonatomic) MessageController* messageController;
+-(void)setFriend:(FriendModel*) friend withBool:(bool) isfromFriend;
+-(void)setShouldReply:(BOOL) should;
 @end

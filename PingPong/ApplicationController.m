@@ -9,7 +9,7 @@
 #import "ApplicationController.h"
 #import "ApplicationHelper.h"
 #import "ViewController.h"
-
+#import "MessageController.h"
 
 @implementation ApplicationController
 
@@ -70,11 +70,11 @@
 
 -(NSData *) getHttpRequest:(NSString *) url{
     NSURL * serviceUrl = [NSURL URLWithString:[applicationHelper generateUrl:url]];
-    NSMutableURLRequest * serviceRequest = [NSMutableURLRequest requestWithURL:serviceUrl];
-    [serviceRequest setValue:@"text" forHTTPHeaderField:@"Content-type"];
-    [serviceRequest addValue:[authHelper getAuthToken] forHTTPHeaderField:@"X-AUTH-TOKEN"];
-    [serviceRequest setHTTPMethod:@"GET"];
-    return [self getResp:serviceRequest];
+    NSMutableURLRequest * serviceReq = [NSMutableURLRequest requestWithURL:serviceUrl];
+    [serviceReq setValue:@"text" forHTTPHeaderField:@"Content-type"];
+    [serviceReq addValue:[authHelper getAuthToken] forHTTPHeaderField:@"X-AUTH-TOKEN"];
+    [serviceReq setHTTPMethod:@"GET"];
+    return [self getResp:serviceReq];
 };
 -(BOOL)hasError{
     return isErrors;
@@ -154,7 +154,14 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
     CGSize screenSize = screenBound.size;
     CGFloat screenWidth = screenSize.width;
     CGFloat screenHeight = screenSize.height;
-
+    if(percentageDownloaded == 100){
+        NSLog(@"herja");
+        
+        //[self performSelector:imageUpload];
+        MessageController *messageController = self;
+        [messageController imageIsUploaded];
+        
+    }
     NSLog(@"Skrevet %ld av totalt %ld percentage %d", (long)totalBytesWritten, (long)totalBytesExpectedToWrite, percentageDownloaded);
 }
 

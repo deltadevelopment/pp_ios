@@ -13,6 +13,7 @@
 @property (nonatomic,strong) NSString * userId;
 @property (nonatomic,strong) NSString * username;
 @property(nonatomic) BOOL isRequester;
+@property(nonatomic) int type;
 
 -(void)build:(NSMutableDictionary *)dic;
 @end

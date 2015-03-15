@@ -40,6 +40,7 @@ UIBarButtonItem *currentRight;
     friendsController =[[FriendsController alloc] init];
     [friendsController initFriends];
     [friendsController initFriendRequests];
+    [friendsController test];
     [super viewDidLoad];
     
     
@@ -60,6 +61,7 @@ UIBarButtonItem *currentRight;
     friendRequests = [friendsController getFriendRequests];
     if([friendRequests count] != 0){
         sections = 2;
+        NSLog(@"sectionss");
     }
     //self.tableView.allowsSelection = NO;
 
@@ -92,6 +94,7 @@ UIBarButtonItem *currentRight;
 - (void)getLatestFriends {
     [friendsController initFriends];
     [friendsController initFriendRequests];
+    [friendsController test];
     friends = [friendsController getFriends];
     friendRequests = [friendsController getFriendRequests];
     if([friendRequests count] != 0){
@@ -169,12 +172,36 @@ UIBarButtonItem *currentRight;
         cell.nameLabel.text = [friend username];
         cell.backgroundColor = [colorHelper getColor];
         [cell iconImage].userInteractionEnabled =YES;
-        UITapGestureRecognizer *tapGr;
-        tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMessage:)];
-        tapGr.numberOfTapsRequired = 1;
-        [tapGr setCancelsTouchesInView: YES];
+        //UITapGestureRecognizer *tapGr;
+        //tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMessage:)];
+        //tapGr.numberOfTapsRequired = 1;
+        //[tapGr setCancelsTouchesInView: YES];
         //[tapGr setDelegate: self];
-        [[cell iconImage] addGestureRecognizer:tapGr];
+        
+        /*  
+         1 = konvoloutt
+         2 = bilde
+         3 = video
+         */
+        //[[cell iconImage] addGestureRecognizer:tapGr];
+        if([friend type] == 0){
+            cell.iconImage.image = [UIImage imageNamed:@""];
+        }else if ([friend type] == 1){
+                 cell.iconImage.contentMode = UIViewContentModeScaleAspectFit;
+            cell.iconImage.image = [UIImage imageNamed:@"message.png"];
+       
+            
+        }
+        else if ([friend type] == 2){
+            cell.iconImage.image = [UIImage imageNamed:@"camera.png"];
+            
+        }
+        else if ([friend type] == 3){
+            cell.iconImage.image = [UIImage imageNamed:@"video.png"];
+            
+        }
+        
+        
         if(indexPath.row == [friends count] - 1){
             self.tableView.backgroundColor = cell.backgroundColor;
         }
@@ -205,12 +232,36 @@ UIBarButtonItem *currentRight;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)path
 {
-    
+    bool toggle = NO;
     MessageViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friend"];
     ComposeViewController *vc2 = [self.storyboard instantiateViewControllerWithIdentifier:@"compose"];
     if(path.section == 0){
         FriendModel *friendModel = [friends objectAtIndex:path.row];
-        [vc setFriend:friendModel];
+        
+        /*
+         1 = konvoloutt
+         2 = bilde
+         3 = video
+         */
+        if([friendModel type] == 1){
+            //SE din venn
+            toggle = YES;
+            [vc2 setShouldSendNew:NO];
+            [vc setFriend:friendModel withBool:YES];
+        }
+        else if([friendModel type] == 2 || [friendModel type] == 3){
+            //Se meg selv
+            //vise vc
+            toggle = YES;
+            [vc setFriend:friendModel withBool:NO];
+        }
+        
+        else {
+            toggle = NO;
+            [vc2 setShouldSendNew:YES];
+        }
+        
+        NSLog(@" der: %@ ",[friendModel userId]);
         [vc2 setFriend:friendModel];
         self.navigationItem.backBarButtonItem =
         [[UIBarButtonItem alloc] initWithTitle:@""
@@ -221,18 +272,23 @@ UIBarButtonItem *currentRight;
         
     }else{
         FriendModel *friendModel = [friendRequests objectAtIndex:path.row];
-        [vc setFriend:friendModel];
+        //[vc setFriend:friendModel];
     }
-   // [self.navigationController pushViewController:vc animated:YES];
-     [self.navigationController pushViewController:vc2 animated:YES];
+    if(toggle){
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        [self.navigationController pushViewController:vc2 animated:YES];
+    }
+ 
 
 }
 
 
 -(void)showMessage:(UITapGestureRecognizer *) sender{
-    NSLog(@"show");
-    MessageViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friend"];
-    [self.navigationController pushViewController:vc animated:YES];
+    //NSLog(@"show");
+    //MessageViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friend"];
+    //[self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)acceptFriendRequest:(UITapGestureRecognizer *) sender{

@@ -9,20 +9,37 @@
 #import "MessageViewController.h"
 #import "ComposeViewController.h"
 #import "FriendModel.h"
+#import "MessageModel.h"
 #import "MessageController.h"
+#import "CameraHelper.h"
 
 @interface MessageViewController ()
 
 @end
 
 @implementation MessageViewController
+@synthesize textRecieved;
+@synthesize messageController;
 ComposeViewController *composeViewController;
 FriendModel *currentFriend;
-MessageController* messageController;
+CGRect screenBound;
+CGSize screenSize;
+CGFloat screenWidth;
+CGFloat screenHeight;
+bool tisFromFriend;
+MessageModel *message;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    screenBound = [[UIScreen mainScreen] bounds];
+    screenSize = screenBound.size;
+    screenWidth = screenSize.width;
+    screenHeight = screenSize.height;
     self.imageRecieved.userInteractionEnabled =YES;
+    if(messageController == nil){
     messageController =[[MessageController alloc] init];
+    }
+    
     UISwipeGestureRecognizer *swipeRightGesture=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGestureRight)];
     swipeRightGesture.direction=UISwipeGestureRecognizerDirectionRight;
     swipeRightGesture.numberOfTouchesRequired = 1;
@@ -36,14 +53,48 @@ MessageController* messageController;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     // [self.navigationItem.rightBarButtonItem setBackgroundImage:[UIImage imageNamed:@"settings.png"] forState:UIControlStateNormal barMetrics:nil];
+
 }
 
 -(void)sendMessage{
     [messageController sendMessageToUser:@"4" message:@"Hei hei"];
 }
 
--(void)setFriend:(FriendModel*) friend{
+
+-(void)setFriend:(FriendModel*) friend withBool:(bool) isfromFriend{
+    tisFromFriend = isfromFriend;
     currentFriend = friend;
+    NSLog(@"------------------------");
+    
+    if(messageController == nil){
+        messageController =[[MessageController alloc] init];
+    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if(isfromFriend){
+            message = [messageController getMessageFromUser:[currentFriend userId]];
+        }else{
+            message =[messageController getMessageSentToUser:[currentFriend userId]];
+        }
+        
+        NSData *data =[message getMedia];
+        
+        NSLog(@"----------HER");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+            CameraHelper *cameraHelper = [[CameraHelper alloc]init];
+            CGSize size = CGSizeMake(screenWidth, screenHeight);
+            
+            self.imageRecieved.image =  [cameraHelper imageByScalingAndCroppingForSize:size img:[UIImage imageWithData:data]];
+            textRecieved.selectable = YES;
+            textRecieved.text =[message body];
+            textRecieved.selectable = NO;
+        });
+        
+    });
+    
+    
+   // NSLog(@"media url is: %@", [message media_url]);
     //self.navigationController.navigationBar.topItem.title =@"test";//[friend username];
     [[self navigationItem] setTitle:[friend username]];
 }
@@ -53,20 +104,24 @@ MessageController* messageController;
 }
 
 -(void)handleSwipeGestureLeft{
-    NSLog(@"sqipe left");
-    //composeViewController=[[ComposeViewController alloc] initWithNibName:@"ComposeViewController" bundle:[NSBundle mainBundle]];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    composeViewController = [storyboard instantiateViewControllerWithIdentifier:@"compose"];
-    CATransition *transition = [CATransition animation];
-    transition.duration = 0.75;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionPush;
-    transition.subtype =kCATransitionFromRight;
-    transition.delegate = self;
-    [self.view.layer addAnimation:transition forKey:nil];
-    [self.view addSubview:composeViewController.view];
-    //[self presentViewController:composeViewController animated:NO completion:nil];
+    if(tisFromFriend){
+        NSLog(@"sqipe left");
+        //composeViewController=[[ComposeViewController alloc] initWithNibName:@"ComposeViewController" bundle:[NSBundle mainBundle]];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        composeViewController = [storyboard instantiateViewControllerWithIdentifier:@"compose"];
+        [composeViewController setMessageFriend:message];
+        CATransition *transition = [CATransition animation];
+        transition.duration = 0.75;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
+        transition.type = kCATransitionPush;
+        transition.subtype =kCATransitionFromRight;
+        transition.delegate = self;
+        [self.view.layer addAnimation:transition forKey:nil];
+        [self.view addSubview:composeViewController.view];
+        //[self presentViewController:composeViewController animated:NO completion:nil];
+    }
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -23,6 +23,8 @@
     SEL aSelector;
     SEL imageUploaded;
     NSObject *currentObject;
+    SEL imageUpload;
+    NSObject *subClass;
 }
 
 -(NSData *) getHttpRequest:(NSString *) url;

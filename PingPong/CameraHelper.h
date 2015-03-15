@@ -13,4 +13,5 @@
 - (void) takePicture:(UIView *) view setImageAtView:(UIView*) view2;
 -(UIImage *) getImage;
 -(NSData *) getImageAsData;
+- (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize img:(UIImage *) sourceImage;
 @end
