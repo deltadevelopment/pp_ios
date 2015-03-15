@@ -111,7 +111,10 @@ UIImageView *addedIndicator;
 }
 
 - (void)getLatestFriends {
+    
+    if(friendsController != nil){
     friendsController = [[FriendsController alloc] init];
+    }
     [friendsController initFriends];
     [friendsController initFriendRequests];
     NSLog(@"friends: %lu", (unsigned long)[[friendsController getFriends] count]);
@@ -127,6 +130,7 @@ UIImageView *addedIndicator;
     }
     [self.tableView reloadData];
     [self.view setNeedsDisplay];
+   
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMM d, h:mm a"];
     NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
@@ -299,6 +303,7 @@ UIImageView *addedIndicator;
             [vc2 setCurrentIndexPath:path];
             [vc2 setColor:cell.backgroundColor];
             [vc2 setFriend:friendModel];
+    
         }
         
         NSLog(@" der: %@ ",[friendModel userId]);

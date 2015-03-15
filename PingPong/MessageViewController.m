@@ -192,9 +192,11 @@ MessageModel *message;
         [messageController deleteMessage:[message Id]];
         
     }
-    [self setView:[[MainTableViewController alloc] init] second:@"friendsNavigation"];
+    //[self setView:[[MainTableViewController alloc] init] second:@"friendsNavigation"];
+    MainTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friendsNavigation"];
     //[self.navigationController pushViewController:[[MainTableViewController alloc] init] animated:YES];
     //[self.navigationController popViewControllerAnimated:YES];
+     [self presentViewController:vc animated:YES completion:NULL];
 }
 
 -(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
@@ -202,7 +204,8 @@ MessageModel *message;
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
    
-    [self presentViewController:controller animated:YES completion:NULL];
+   // [self presentViewController:controller animated:YES completion:NULL];
+   
     //[self presentationController an]
 }
 

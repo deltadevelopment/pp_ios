@@ -70,10 +70,11 @@ bool shouldSendNew;
 -(void)setColor:(UIColor *) color{
     self.view.backgroundColor = color;
 }
+
 -(void)sendMessage{
 //
     NSLog(@"Send message here");
-    MainTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friendsNavigation"];
+    MainTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friendsList"];
     //MainTableViewController *maintableView = [[MainTableViewController alloc] init];
     //[messageController setSelector:[maintableView getAdded] withObject:maintableView];
     //[maintableView setCurrentIndexPath:currentIndexPath];
@@ -95,7 +96,8 @@ bool shouldSendNew;
         
     }
     
-   [self presentViewController:vc animated:YES completion:NULL];
+   //[self presentViewController:vc animated:YES completion:NULL];
+    [self.navigationController popToRootViewControllerAnimated:YES];
    
 }
 
