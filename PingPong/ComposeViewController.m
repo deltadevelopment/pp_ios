@@ -11,6 +11,7 @@
 #import "MessageController.h"
 #import "FriendModel.h"
 #import "MessageModel.h"
+#import "MainTableViewController.h"
 @interface ComposeViewController ()
 
 @end
@@ -20,6 +21,7 @@ CameraHelper *cameraHelper;
 MessageController *messageController;
 FriendModel *currentFriend;
 MessageModel *currentMessage;
+NSIndexPath *currentIndexPath;
 bool shouldSendNew;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -60,12 +62,19 @@ bool shouldSendNew;
 -(void)setShouldSendNew:(BOOL) should{
     shouldSendNew = should;
 }
-
+-(void)setCurrentIndexPath:(NSIndexPath *) indexPath{
+    currentIndexPath = indexPath;
+}
+-(void)setColor:(UIColor *) color{
+    self.view.backgroundColor = color;
+}
 -(void)sendMessage{
 //
     NSLog(@"Send message here");
  
-    
+    MainTableViewController *maintableView = [[MainTableViewController alloc] init];
+    [messageController setSelector:[maintableView getAdded] withObject:maintableView];
+    //[maintableView setCurrentIndexPath:currentIndexPath];
     //STEP 2
   // [messageController sendMessageToUser:[currentFriend userId] message:self.textView.text];
     if(shouldSendNew){
@@ -74,14 +83,26 @@ bool shouldSendNew;
         [messageController sendMessageToUserWithImage:[currentFriend userId] message:self.textView.text imgData:[cameraHelper getImageAsData]];
        
     }else{
-        [messageController replyToUser:[currentMessage Id] message:self.textView.text];
+        //[messageController replyToUser:[currentMessage Id] message:self.textView.text];
         [messageController replyToUserWithImage:[currentMessage Id] message:self.textView.text image:[cameraHelper getImageAsData]];
     }
+    
+    [self setView:[[MainTableViewController alloc] init] second:@"friendsNavigation"];
    
+}
+
+-(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
+    //self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
+    
+    [self presentViewController:controller animated:YES completion:NULL];
+    //[self presentationController an]
 }
 
 -(void)setFriend:(FriendModel*) friend{
     currentFriend = friend;
+    [[self navigationItem] setTitle:[friend username]];
 }
 
 -(void)setMessageFriend:(MessageModel*) message{

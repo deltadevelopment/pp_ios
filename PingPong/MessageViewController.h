@@ -15,4 +15,6 @@
 @property (strong, nonatomic) MessageController* messageController;
 -(void)setFriend:(FriendModel*) friend withBool:(bool) isfromFriend;
 -(void)setShouldReply:(BOOL) should;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+-(void)setColor:(UIColor *) color;
 @end

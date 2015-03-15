@@ -87,7 +87,7 @@ bool reply;
 }
 
 -(void)imageIsUploaded{
-    NSLog(@"here");
+    NSLog(@"here---------------------");
     if(reply){
         [self replyToUser:tmessageId message:tbody];
     }else{
@@ -134,4 +134,17 @@ bool reply;
     return message;
 
 }
+
+-(void)deleteMessage:(NSString *) withId{
+    NSLog(@"Deleting message");
+    NSData *response = [self deleteHttpRequest:[NSString stringWithFormat:@"message/%@", withId]];
+    ParserHelper *parserHelper =[[ParserHelper alloc] init];
+    NSMutableDictionary *dic = [parserHelper parse:response];
+    MessageModel *message = [[MessageModel alloc] init];
+    [message build:dic[@"message"]];
+    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    NSLog(strdata);
+
+}
+
 @end

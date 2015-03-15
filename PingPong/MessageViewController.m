@@ -12,6 +12,7 @@
 #import "MessageModel.h"
 #import "MessageController.h"
 #import "CameraHelper.h"
+#import "MainTableViewController.h"
 
 @interface MessageViewController ()
 
@@ -40,6 +41,14 @@ MessageModel *message;
     messageController =[[MessageController alloc] init];
     }
     
+    textRecieved.hidden = YES;
+
+    CALayer *textLayer = (CALayer *)[self.textRecieved.layer.sublayers objectAtIndex:0];
+    textLayer.shadowColor = [UIColor blackColor].CGColor;
+    textLayer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    textLayer.shadowOpacity = 1.0f;
+    textLayer.shadowRadius = 0.0f;
+    
     UISwipeGestureRecognizer *swipeRightGesture=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGestureRight)];
     swipeRightGesture.direction=UISwipeGestureRecognizerDirectionRight;
     swipeRightGesture.numberOfTouchesRequired = 1;
@@ -59,9 +68,16 @@ MessageModel *message;
 -(void)sendMessage{
     [messageController sendMessageToUser:@"4" message:@"Hei hei"];
 }
+-(void)setColor:(UIColor *) color{
+    
+    self.view.backgroundColor = color;
+
+}
 
 
 -(void)setFriend:(FriendModel*) friend withBool:(bool) isfromFriend{
+    [self.indicator startAnimating];
+    self.indicator.hidden = NO;
     tisFromFriend = isfromFriend;
     currentFriend = friend;
     NSLog(@"------------------------");
@@ -86,9 +102,13 @@ MessageModel *message;
             CGSize size = CGSizeMake(screenWidth, screenHeight);
             
             self.imageRecieved.image =  [cameraHelper imageByScalingAndCroppingForSize:size img:[UIImage imageWithData:data]];
+            [self.indicator stopAnimating];
+            self.indicator.hidden = YES;
             textRecieved.selectable = YES;
+            textRecieved.hidden = NO;
             textRecieved.text =[message body];
             textRecieved.selectable = NO;
+            
         });
         
     });
@@ -96,12 +116,32 @@ MessageModel *message;
     
    // NSLog(@"media url is: %@", [message media_url]);
     //self.navigationController.navigationBar.topItem.title =@"test";//[friend username];
+    NSLog(@"USERNAM %@", [friend username]);
     [[self navigationItem] setTitle:[friend username]];
 }
 
 -(void)handleSwipeGestureRight{
     NSLog(@"sqipe right");
+    if(tisFromFriend){
+    //slett melding
+        [messageController deleteMessage:[message Id]];
+        
+    }
+    [self setView:[[MainTableViewController alloc] init] second:@"friendsNavigation"];
+    //[self.navigationController pushViewController:[[MainTableViewController alloc] init] animated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
 }
+
+-(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
+    //self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
+   
+    [self presentViewController:controller animated:YES completion:NULL];
+    //[self presentationController an]
+}
+
+
 
 -(void)handleSwipeGestureLeft{
     if(tisFromFriend){

@@ -26,6 +26,11 @@
     return self;
 }
 
+-(void)setSelector:(SEL) theSelector withObject:(NSObject *) theObject{
+    indicatorSelector = theSelector;
+    Tableview = theObject;
+}
+
 -(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
     //self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
@@ -160,6 +165,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
         //[self performSelector:imageUpload];
         MessageController *messageController = self;
         [messageController imageIsUploaded];
+        [Tableview performSelector:indicatorSelector];
         
     }
     NSLog(@"Skrevet %ld av totalt %ld percentage %d", (long)totalBytesWritten, (long)totalBytesExpectedToWrite, percentageDownloaded);

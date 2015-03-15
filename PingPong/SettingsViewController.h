@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : UIViewController<UIAlertViewDelegate, UITextFieldDelegate>
+- (IBAction)logoutAction:(id)sender;
+- (IBAction)deleteUser:(id)sender;
+- (IBAction)changePass:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *nameLabel;
+@property (weak, nonatomic) IBOutlet UITextField *changePass;
+
+
+
 
 @end

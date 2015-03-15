@@ -20,4 +20,5 @@
 -(void)sendMessageToUserWithImage:(NSString *) userId message:(NSString*) body imgData:(NSData *) img;
 -(void)imageIsUploaded;
 -(MessageModel *)getMessageSentToUser:(NSString *) userId;
+-(void)deleteMessage:(NSString *) withId;
 @end

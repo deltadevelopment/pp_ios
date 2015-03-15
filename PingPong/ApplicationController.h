@@ -25,8 +25,12 @@
     NSObject *currentObject;
     SEL imageUpload;
     NSObject *subClass;
+    SEL indicatorSelector;
+    NSObject *Tableview;
 }
 
+
+-(void)setSelector:(SEL) theSelector withObject:(NSObject *) theObject;
 -(NSData *) getHttpRequest:(NSString *) url;
 -(NSData  *) postHttpRequest:(NSString *) url
                         json:(NSString *) data;

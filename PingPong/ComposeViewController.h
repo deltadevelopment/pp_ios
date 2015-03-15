@@ -15,5 +15,6 @@
 -(void)setFriend:(FriendModel*) friend;
 -(void)setMessageFriend:(MessageModel*) message;
 -(void)setShouldSendNew:(BOOL) should;
-
+-(void)setCurrentIndexPath:(NSIndexPath *) indexPath;
+-(void)setColor:(UIColor *) color;
 @end

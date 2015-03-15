@@ -11,5 +11,8 @@
 @interface MainTableViewController : UITableViewController<UITextFieldDelegate>
 - (IBAction)search:(id)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addFriendButton;
+-(UIImageView*)getIndicator;
+-(SEL)getAdded;
 
+-(void)setCurrentIndexPath:(NSIndexPath *) indexPath;
 @end

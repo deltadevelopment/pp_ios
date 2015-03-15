@@ -29,19 +29,28 @@ UITextField *searchText;
 UIView *currentTitleView;
 SEL selectorTest;
 SEL successSelector;
+SEL added;
 FriendsController *friendsController;
 NSIndexPath *currentIndexPath;
+NSIndexPath *currentIndexPathFromCompose;
 int sections = 1;
 UIBarButtonItem *currentRight;
+UIImageView *addedIndicator;
 
 - (void)viewDidLoad {
     selectorTest = @selector(userDoesNotExist);
     successSelector = @selector(getRequestIsDone);
+    added = @selector(imageIsDone);
     friendsController =[[FriendsController alloc] init];
     [friendsController initFriends];
     [friendsController initFriendRequests];
     [friendsController test];
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem =
+    [[UIBarButtonItem alloc] initWithTitle:@""
+                                     style:UIBarButtonItemStyleBordered
+                                    target:nil
+                                    action:nil];
     
     
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -50,10 +59,6 @@ UIBarButtonItem *currentRight;
     [self.refreshControl addTarget:self
                             action:@selector(getLatestFriends)
                   forControlEvents:UIControlEventValueChanged];
-
-    
-    
-    
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
       NSLog(@"start");
    // friends = [[NSMutableArray alloc] initWithObjects:@"Roger",@"Simen", @"Chris", @"Frode", @"Christian", nil];
@@ -89,6 +94,20 @@ UIBarButtonItem *currentRight;
     
    // self.navigationItem.leftBarButtonItem
     
+}
+
+-(SEL)getAdded{
+    return added;
+}
+
+-(void)imageIsDone{
+    [self refresh];
+    //load her
+    
+}
+
+-(UIImageView*)getIndicator{
+    return addedIndicator;
 }
 
 - (void)getLatestFriends {
@@ -230,9 +249,15 @@ UIBarButtonItem *currentRight;
     return cell;
 }
 
+-(void)setCurrentIndexPath:(NSIndexPath *) indexPath{
+   currentIndexPathFromCompose = indexPath;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)path
 {
     bool toggle = NO;
+    MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+    
     MessageViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friend"];
     ComposeViewController *vc2 = [self.storyboard instantiateViewControllerWithIdentifier:@"compose"];
     if(path.section == 0){
@@ -247,18 +272,24 @@ UIBarButtonItem *currentRight;
             //SE din venn
             toggle = YES;
             [vc2 setShouldSendNew:NO];
+            
             [vc setFriend:friendModel withBool:YES];
+            [vc setColor:cell.backgroundColor];
         }
         else if([friendModel type] == 2 || [friendModel type] == 3){
             //Se meg selv
             //vise vc
+             [vc2 setColor:cell.backgroundColor];
             toggle = YES;
             [vc setFriend:friendModel withBool:NO];
+            [vc setColor:cell.backgroundColor];
         }
         
         else {
             toggle = NO;
             [vc2 setShouldSendNew:YES];
+            [vc2 setCurrentIndexPath:path];
+            [vc2 setColor:cell.backgroundColor];
         }
         
         NSLog(@" der: %@ ",[friendModel userId]);
@@ -301,12 +332,16 @@ UIBarButtonItem *currentRight;
 
     
 }
--(void)acceptSuccess{
-    NSLog(@"success");
+-(void)refresh{
     [friendsController initFriends];
     [friendsController initFriendRequests];
+    [friendsController test];
     friends = [friendsController getFriends];
     friendRequests = [friendsController getFriendRequests];
+}
+-(void)acceptSuccess{
+    NSLog(@"success");
+    [self refresh];
     [self.tableView reloadData];
 }
 

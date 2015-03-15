@@ -44,6 +44,9 @@
 		C5D574E71AB4AF0400D2FC37 /* FriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574E61AB4AF0400D2FC37 /* FriendModel.m */; };
 		C5D574EA1AB4D83A00D2FC37 /* MessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574E91AB4D83A00D2FC37 /* MessageController.m */; };
 		C5D574ED1AB500B600D2FC37 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574EC1AB500B600D2FC37 /* MessageModel.m */; };
+		C5D574EF1AB5547300D2FC37 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D574EE1AB5547300D2FC37 /* plus.png */; };
+		C5D574F11AB554A600D2FC37 /* ping-pong.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D574F01AB554A600D2FC37 /* ping-pong.png */; };
+		C5D574F41AB5636C00D2FC37 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D574F31AB5636C00D2FC37 /* SettingsController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +123,10 @@
 		C5D574E91AB4D83A00D2FC37 /* MessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageController.m; sourceTree = "<group>"; };
 		C5D574EB1AB500B600D2FC37 /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
 		C5D574EC1AB500B600D2FC37 /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
+		C5D574EE1AB5547300D2FC37 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plus.png; path = ../../../Downloads/plus.png; sourceTree = "<group>"; };
+		C5D574F01AB554A600D2FC37 /* ping-pong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ping-pong.png"; path = "../../../Downloads/ping-pong.png"; sourceTree = "<group>"; };
+		C5D574F21AB5636C00D2FC37 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		C5D574F31AB5636C00D2FC37 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +216,8 @@
 			isa = PBXGroup;
 			children = (
 				C5D574B21AB44CFA00D2FC37 /* video.png */,
+				C5D574F01AB554A600D2FC37 /* ping-pong.png */,
+				C5D574EE1AB5547300D2FC37 /* plus.png */,
 				C5D574B51AB44CFA00D2FC37 /* plus.png */,
 				C5D574C91AB4573100D2FC37 /* settings.png */,
 				C5D574DD1AB47FFC00D2FC37 /* tick.png */,
@@ -263,6 +272,8 @@
 				C5D574E01AB488F300D2FC37 /* FriendsController.m */,
 				C5D574E81AB4D83A00D2FC37 /* MessageController.h */,
 				C5D574E91AB4D83A00D2FC37 /* MessageController.m */,
+				C5D574F21AB5636C00D2FC37 /* SettingsController.h */,
+				C5D574F31AB5636C00D2FC37 /* SettingsController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -382,12 +393,14 @@
 				C5D574741AB4331F00D2FC37 /* Main.storyboard in Resources */,
 				C5D574DE1AB47FFC00D2FC37 /* tick.png in Resources */,
 				C5D574C01AB44CFA00D2FC37 /* play.png in Resources */,
+				C5D574EF1AB5547300D2FC37 /* plus.png in Resources */,
 				C5D574791AB4331F00D2FC37 /* LaunchScreen.xib in Resources */,
 				C5D574C81AB454AC00D2FC37 /* selfie.jpg in Resources */,
 				C5D574BF1AB44CFA00D2FC37 /* search.png in Resources */,
 				C5D574761AB4331F00D2FC37 /* Images.xcassets in Resources */,
 				C5D574BB1AB44CFA00D2FC37 /* video.png in Resources */,
 				C5D574BE1AB44CFA00D2FC37 /* plus.png in Resources */,
+				C5D574F11AB554A600D2FC37 /* ping-pong.png in Resources */,
 				C5D574CA1AB4573100D2FC37 /* settings.png in Resources */,
 				C5D574C31AB44CFA00D2FC37 /* camera.png in Resources */,
 			);
@@ -419,6 +432,7 @@
 				C5D5746E1AB4331F00D2FC37 /* AppDelegate.m in Sources */,
 				C5D574AE1AB440A800D2FC37 /* AuthHelper.m in Sources */,
 				C5D574ED1AB500B600D2FC37 /* MessageModel.m in Sources */,
+				C5D574F41AB5636C00D2FC37 /* SettingsController.m in Sources */,
 				C5D5749B1AB43F7100D2FC37 /* MainTableViewCell.m in Sources */,
 				C5D574C61AB44D9400D2FC37 /* NavigationViewController.m in Sources */,
 				C5D574E71AB4AF0400D2FC37 /* FriendModel.m in Sources */,

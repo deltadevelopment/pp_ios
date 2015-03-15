@@ -132,10 +132,10 @@ NSMutableArray *messages;
     
     for(MessageModel *message in messages){
         for(FriendModel *friend in friends){
-            NSLog(@"friend: %@ message: %@", [friend userId], [[message user] userId]);
+            //NSLog(@"friend: %@ message: %@", [friend userId], [[message user] userId]);
             if([[friend userId] intValue] == [[[message user] userId ] intValue]){
             //Dette er venn som du har melding med
-               NSLog(@"friend: %@ message: %@", [message sender_id], [authHelper getUserId]);
+             //  NSLog(@"friend: %@ message: %@", [message sender_id], [authHelper getUserId]);
                 if([[message sender_id] intValue] != [[authHelper getUserId] intValue]){
                     //IKKe deg selv. vis konvolutt
                     friend.type = 1;
@@ -143,9 +143,9 @@ NSMutableArray *messages;
                    
                 }else if([[message sender_id] intValue] == [[authHelper getUserId] intValue]){
                     //Er deg selv som har sendt bilde
-                    NSLog(@"du har sendt");
+                   // NSLog(@"du har sendt");
                     if([[message media_type] intValue] == 1){
-                        NSLog(@"du har sendt");
+                     //   NSLog(@"du har sendt");
                           friend.type = 2;
                         //Bilde du har sendt
                     }

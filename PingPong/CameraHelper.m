@@ -139,7 +139,7 @@ UIImage *imgTaken;
             //imgView2.image = [self imageByScalingAndCroppingForSize:size img:imgTaken];
             UIImageView *imgView = [[UIImageView alloc] initWithImage:[self imageByScalingAndCroppingForSize:size img:imgTaken]];
             view2.hidden = NO;
-            [view2 insertSubview:imgView atIndex:0];
+            //[view2 insertSubview:imgView atIndex:0];
             CGRect cropRect = CGRectMake(0 ,0 ,screenWidth ,screenHeight);
             UIGraphicsBeginImageContextWithOptions(cropRect.size, view, 1.0f);
             [imgTaken drawInRect:cropRect];
