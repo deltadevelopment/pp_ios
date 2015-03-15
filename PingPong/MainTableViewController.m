@@ -101,7 +101,7 @@ UIImageView *addedIndicator;
 }
 
 -(void)imageIsDone{
-    [self refresh];
+    //[self refresh];
     //load her
     
 }
@@ -111,15 +111,22 @@ UIImageView *addedIndicator;
 }
 
 - (void)getLatestFriends {
+    friendsController = [[FriendsController alloc] init];
     [friendsController initFriends];
     [friendsController initFriendRequests];
+    NSLog(@"friends: %lu", (unsigned long)[[friendsController getFriends] count]);
     [friendsController test];
     friends = [friendsController getFriends];
+    for(FriendModel * friend in friends){
+        NSLog([friend username]);
+    }
+    
     friendRequests = [friendsController getFriendRequests];
     if([friendRequests count] != 0){
         sections = 2;
     }
     [self.tableView reloadData];
+    [self.view setNeedsDisplay];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMM d, h:mm a"];
     NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
@@ -189,6 +196,7 @@ UIImageView *addedIndicator;
     if(indexPath.section == 0){
         FriendModel *friend =[friends objectAtIndex:indexPath.row];
         cell.nameLabel.text = [friend username];
+        NSLog(@"%@", cell.nameLabel.text);
         cell.backgroundColor = [colorHelper getColor];
         [cell iconImage].userInteractionEnabled =YES;
         //UITapGestureRecognizer *tapGr;
@@ -271,7 +279,7 @@ UIImageView *addedIndicator;
         if([friendModel type] == 1){
             //SE din venn
             toggle = YES;
-            [vc2 setShouldSendNew:NO];
+            //[vc2 setShouldSendNew:NO];
             
             [vc setFriend:friendModel withBool:YES];
             [vc setColor:cell.backgroundColor];
@@ -279,7 +287,7 @@ UIImageView *addedIndicator;
         else if([friendModel type] == 2 || [friendModel type] == 3){
             //Se meg selv
             //vise vc
-             [vc2 setColor:cell.backgroundColor];
+             //[vc2 setColor:cell.backgroundColor];
             toggle = YES;
             [vc setFriend:friendModel withBool:NO];
             [vc setColor:cell.backgroundColor];
@@ -290,10 +298,11 @@ UIImageView *addedIndicator;
             [vc2 setShouldSendNew:YES];
             [vc2 setCurrentIndexPath:path];
             [vc2 setColor:cell.backgroundColor];
+            [vc2 setFriend:friendModel];
         }
         
         NSLog(@" der: %@ ",[friendModel userId]);
-        [vc2 setFriend:friendModel];
+        
         self.navigationItem.backBarButtonItem =
         [[UIBarButtonItem alloc] initWithTitle:@""
                                          style:UIBarButtonItemStyleBordered
@@ -328,7 +337,18 @@ UIImageView *addedIndicator;
     FriendModel *friendRequest = [friendRequests objectAtIndex:tapIndexPath.row];
     //NSString *userId = [NSString stringWithFormat:@"%d", [friendRequest userId] ];
     SEL success = @selector(acceptSuccess);
-    [friendsController acceptFriendRequestFromUser:[friendRequest userId] withSucess:success andObject:self];
+    
+    NSLog(@"adding friend");
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [friendsController acceptFriendRequestFromUser:[friendRequest userId] withSucess:success andObject:self];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+            
+        });
+        
+    });
+    
+  
 
     
 }

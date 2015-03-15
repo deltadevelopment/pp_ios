@@ -57,6 +57,8 @@ bool shouldSendNew;
                                    userInfo:nil
                                     repeats:NO];
     // Do any additional setup after loading the view.
+    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 -(void)setShouldSendNew:(BOOL) should{
@@ -71,9 +73,9 @@ bool shouldSendNew;
 -(void)sendMessage{
 //
     NSLog(@"Send message here");
- 
-    MainTableViewController *maintableView = [[MainTableViewController alloc] init];
-    [messageController setSelector:[maintableView getAdded] withObject:maintableView];
+    MainTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friendsNavigation"];
+    //MainTableViewController *maintableView = [[MainTableViewController alloc] init];
+    //[messageController setSelector:[maintableView getAdded] withObject:maintableView];
     //[maintableView setCurrentIndexPath:currentIndexPath];
     //STEP 2
   // [messageController sendMessageToUser:[currentFriend userId] message:self.textView.text];
@@ -84,10 +86,16 @@ bool shouldSendNew;
        
     }else{
         //[messageController replyToUser:[currentMessage Id] message:self.textView.text];
-        [messageController replyToUserWithImage:[currentMessage Id] message:self.textView.text image:[cameraHelper getImageAsData]];
+        
+        if((NSNull*)[currentMessage parent_id] != [NSNull null]){
+            [messageController sendMessageToUserWithImage:[currentFriend userId] message:self.textView.text imgData:[cameraHelper getImageAsData]];
+        }else{
+            [messageController replyToUserWithImage:[currentMessage Id] message:self.textView.text image:[cameraHelper getImageAsData]];
+        }
+        
     }
     
-    [self setView:[[MainTableViewController alloc] init] second:@"friendsNavigation"];
+   [self presentViewController:vc animated:YES completion:NULL];
    
 }
 

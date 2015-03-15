@@ -59,6 +59,7 @@
     if([httpResponse statusCode] == 200 || [httpResponse statusCode] == 201){
         isErrors = false;
     }else if([httpResponse statusCode] == 403 ){
+        NSLog(@"HER SKULLE DU BLITT LOGGA UT");
         //[authHelper resetCredentials];
         [authHelper resetCredentials];
         [self setView:[[ViewController alloc] init] second:@"login"];
@@ -165,7 +166,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
         //[self performSelector:imageUpload];
         MessageController *messageController = self;
         [messageController imageIsUploaded];
-        [Tableview performSelector:indicatorSelector];
+        //[Tableview performSelector:indicatorSelector];
         
     }
     NSLog(@"Skrevet %ld av totalt %ld percentage %d", (long)totalBytesWritten, (long)totalBytesExpectedToWrite, percentageDownloaded);
