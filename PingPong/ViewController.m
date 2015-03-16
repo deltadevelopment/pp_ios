@@ -22,8 +22,8 @@ LoginController* loginController;
     NSLog([[UIDevice currentDevice] name]);
     NSString *name = [[UIDevice currentDevice] name];
     if(![name isEqualToString:@"Simen sin iPhone"]){
-        self.usernameTextField.text = @"christiandalsvaag";
-        self.passwordTextField.text = @"christiandalsvaag";
+        self.usernameTextField.text = @"simentest";
+        self.passwordTextField.text = @"simentest";
     }
 
     loginController = [[LoginController alloc] init];

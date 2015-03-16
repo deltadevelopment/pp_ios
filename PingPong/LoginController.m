@@ -65,11 +65,11 @@ NSString *passwordError;
     passwordError = passwordErrorArray[0];
     
     NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    NSLog(@"HER: %@",strdata);
+    NSLog(@"register: %@",strdata);
   
     //Store parsed login data in sskey secure
     if(!isErrors){
-    [authHelper storeCredentials:dic];
+        [authHelper storeCredentials:dic[@"user"]];
     }
     
     

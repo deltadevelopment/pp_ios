@@ -11,7 +11,7 @@
 #import "AuthHelper.h"
 #import "ApplicationHelper.h"
 #import <UIKit/UIKit.h>
-
+#import "MainTableViewController.h"
 @interface ApplicationController : NSObject<NSURLConnectionDataDelegate>{
     AuthHelper *authHelper;
     ParserHelper *parserHelper;
@@ -27,9 +27,10 @@
     NSObject *subClass;
     SEL indicatorSelector;
     NSObject *Tableview;
+    MainTableViewController *mainTableViewController;
 }
 
-
+-(void)setNavigationController:(UINavigationController *) navigationController;
 -(void)setSelector:(SEL) theSelector withObject:(NSObject *) theObject;
 -(NSData *) getHttpRequest:(NSString *) url;
 -(NSData  *) postHttpRequest:(NSString *) url

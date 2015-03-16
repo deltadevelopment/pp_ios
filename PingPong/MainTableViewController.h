@@ -15,4 +15,6 @@
 -(SEL)getAdded;
 
 -(void)setCurrentIndexPath:(NSIndexPath *) indexPath;
+-(void)ImageIsUploaded;
+-(void)ImageStartedUploading;
 @end

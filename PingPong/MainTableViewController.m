@@ -36,7 +36,9 @@ NSIndexPath *currentIndexPathFromCompose;
 int sections = 1;
 UIBarButtonItem *currentRight;
 UIImageView *addedIndicator;
-
+NSIndexPath *conversationCellId;
+UIActivityIndicatorView *activityIndicator;
+NSIndexPath *currentIndexPathAccepting;
 - (void)viewDidLoad {
     selectorTest = @selector(userDoesNotExist);
     successSelector = @selector(getRequestIsDone);
@@ -93,6 +95,39 @@ UIImageView *addedIndicator;
     
     
    // self.navigationItem.leftBarButtonItem
+    
+}
+
+-(void)ImageStartedUploading{
+    MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath:conversationCellId];
+    cell.iconImage.image = nil;
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    activityIndicator.alpha = 1.0;
+    activityIndicator.center = CGPointMake(12.5, 12.5);
+    activityIndicator.hidesWhenStopped = NO;
+    
+    [cell.iconImage addSubview:activityIndicator];
+    [activityIndicator startAnimating];
+}
+-(void)ImageIsUploaded{
+    NSLog(@"IMAGE IS uploaded");
+    //NSLog(@"%d",  conversationCellId);
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath:conversationCellId];
+    cell.iconImage.image = [UIImage imageNamed:@"tick.png"];
+    [UIView animateWithDuration:0.3f
+                          delay:0.5f
+                        options: UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         cell.iconImage.alpha = 0.0;
+                         
+                     }
+                     completion:^(BOOL finished){
+                         cell.iconImage.image = [UIImage imageNamed:@"camera.png"];
+                         cell.iconImage.alpha = 1;
+                         [[friends objectAtIndex:conversationCellId.row] setFriendType:2];
+                     }];
     
 }
 
@@ -269,6 +304,7 @@ UIImageView *addedIndicator;
 {
     bool toggle = NO;
     MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+    conversationCellId = path;
     
     MessageViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friend"];
     ComposeViewController *vc2 = [self.storyboard instantiateViewControllerWithIdentifier:@"compose"];
@@ -314,17 +350,19 @@ UIImageView *addedIndicator;
                                         target:nil
                                         action:nil];
         
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        if(toggle){
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else{
+            [self.navigationController pushViewController:vc2 animated:YES];
+        }
         
     }else{
         FriendModel *friendModel = [friendRequests objectAtIndex:path.row];
         //[vc setFriend:friendModel];
     }
-    if(toggle){
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }else{
-        [self.navigationController pushViewController:vc2 animated:YES];
-    }
+   
  
 
 }
@@ -341,9 +379,23 @@ UIImageView *addedIndicator;
     NSIndexPath *tapIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
     FriendModel *friendRequest = [friendRequests objectAtIndex:tapIndexPath.row];
     //NSString *userId = [NSString stringWithFormat:@"%d", [friendRequest userId] ];
+    
+    MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath:conversationCellId];
+    cell.iconImage.image = nil;
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    activityIndicator.alpha = 1.0;
+    activityIndicator.center = CGPointMake(12.5, 12.5);
+    activityIndicator.hidesWhenStopped = NO;
+    
+    [cell.iconImage addSubview:activityIndicator];
+    [activityIndicator startAnimating];
+    
     SEL success = @selector(acceptSuccess);
     
     NSLog(@"adding friend");
+    
+    currentIndexPathAccepting = tapIndexPath;
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [friendsController acceptFriendRequestFromUser:[friendRequest userId] withSucess:success andObject:self];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -366,8 +418,22 @@ UIImageView *addedIndicator;
 }
 -(void)acceptSuccess{
     NSLog(@"success");
-    [self refresh];
-    [self.tableView reloadData];
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath:currentIndexPathAccepting];
+    cell.iconImage.image = [UIImage imageNamed:@"tick.png"];
+    [UIView animateWithDuration:0.3f
+                          delay:0.5f
+                        options: UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         cell.iconImage.alpha = 0.0;
+                         
+                     }
+                     completion:^(BOOL finished){
+                         [self refresh];
+                         [self.tableView reloadData];
+                     }];
+   
 }
 
 

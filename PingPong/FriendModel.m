@@ -17,4 +17,8 @@
     
     
 };
+
+-(void)setFriendType:(int)theType{
+    _type = theType;
+}
 @end

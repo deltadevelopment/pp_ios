@@ -16,4 +16,5 @@
 @property(nonatomic) int type;
 
 -(void)build:(NSMutableDictionary *)dic;
+-(void)setFriendType:(int)theType;
 @end

@@ -25,6 +25,7 @@ NSIndexPath *currentIndexPath;
 bool shouldSendNew;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.textView.text = @"";
     
     UISwipeGestureRecognizer *swipeRightGesture2=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(sendMessage)];
     swipeRightGesture2.direction=UISwipeGestureRecognizerDirectionLeft;
@@ -74,40 +75,44 @@ bool shouldSendNew;
 -(void)sendMessage{
 //
     NSLog(@"Send message here");
-    MainTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friendsList"];
+    //MainTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friendsList"];
     //MainTableViewController *maintableView = [[MainTableViewController alloc] init];
     //[messageController setSelector:[maintableView getAdded] withObject:maintableView];
     //[maintableView setCurrentIndexPath:currentIndexPath];
     //STEP 2
   // [messageController sendMessageToUser:[currentFriend userId] message:self.textView.text];
-    if(shouldSendNew){
-        //STEP 1
-        //[messageController uploadImage:[cameraHelper getImageAsData]];
-        [messageController sendMessageToUserWithImage:[currentFriend userId] message:self.textView.text imgData:[cameraHelper getImageAsData]];
-       
-    }else{
+    [messageController setNavigationController:self.navigationController];
+    
         //[messageController replyToUser:[currentMessage Id] message:self.textView.text];
         
-        if((NSNull*)[currentMessage parent_id] != [NSNull null]){
-            [messageController sendMessageToUserWithImage:[currentFriend userId] message:self.textView.text imgData:[cameraHelper getImageAsData]];
-        }else{
-            [messageController replyToUserWithImage:[currentMessage Id] message:self.textView.text image:[cameraHelper getImageAsData]];
-        }
+    if((NSNull*)[currentMessage parent_id] != [NSNull null]){
         
+        NSLog(@"ny melding: %@",[currentMessage parent_id]);
+       [messageController sendMessageToUserWithImage:[currentFriend userId] message:self.textView.text imgData:[cameraHelper getImageAsData]];
+    }else{
+        NSLog(@"reply til: %@",[currentMessage parent_id]);
+      [messageController replyToUserWithImage:[currentMessage Id] message:self.textView.text image:[cameraHelper getImageAsData]];
     }
     
-   //[self presentViewController:vc animated:YES completion:NULL];
+    
+    
+    //[self presentViewController:vc animated:YES completion:NULL];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+    //[self setView:[[MainTableViewController alloc] init] second:@"friendsNavigation"];
     [self.navigationController popToRootViewControllerAnimated:YES];
-   
+    
+    
+    
 }
 
 -(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
     //self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
+    //[self.window makeKeyAndVisible];
+    [self.navigationController presentViewController:controller animated:NO completion:NULL];
     
-    [self presentViewController:controller animated:YES completion:NULL];
-    //[self presentationController an]
+    
 }
 
 -(void)setFriend:(FriendModel*) friend{

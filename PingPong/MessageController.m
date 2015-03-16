@@ -42,7 +42,10 @@ bool reply;
     
     NSData *response2 = [self postHttpRequest:[NSString stringWithFormat:@"user/%@/message/%@", [authHelper getUserId], userId]  json:jsonData];
     NSMutableDictionary *dic2 = [parserHelper parse:response2];
-
+    if(isErrors){
+        //feil
+        //[ta]
+    }
     NSString *strdata=[[NSString alloc]initWithData:response2 encoding:NSUTF8StringEncoding];
     NSLog(strdata);
 }
@@ -70,7 +73,10 @@ bool reply;
     
     NSData *response2 = [self postHttpRequest:[NSString stringWithFormat:@"message/%@/reply", messageId]  json:jsonData];
     NSMutableDictionary *dic2 = [parserHelper parse:response2];
-    
+    if(isErrors){
+    //feil
+        
+    }
     NSString *strdata=[[NSString alloc]initWithData:response2 encoding:NSUTF8StringEncoding];
     NSLog(strdata);
 }

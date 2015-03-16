@@ -28,8 +28,9 @@ CGFloat screenWidth;
 CGFloat screenHeight;
 bool tisFromFriend;
 MessageModel *message;
-
+bool shouldNotDelete;
 - (void)viewDidLoad {
+     shouldNotDelete = NO;
     [super viewDidLoad];
     screenBound = [[UIScreen mainScreen] bounds];
     screenSize = screenBound.size;
@@ -39,6 +40,9 @@ MessageModel *message;
     if(messageController == nil){
     messageController =[[MessageController alloc] init];
     }
+    
+    self.navigationController.navigationItem.leftBarButtonItem.target = self;
+    self.navigationController.navigationItem.leftBarButtonItem.action = @selector(backButtonDidPressed:);
     
     textRecieved.hidden = YES;
 
@@ -62,6 +66,24 @@ MessageModel *message;
     // Do any additional setup after loading the view.
     // [self.navigationItem.rightBarButtonItem setBackgroundImage:[UIImage imageNamed:@"settings.png"] forState:UIControlStateNormal barMetrics:nil];
 
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
+        //[self.delegate setParentSelectedCity:self.selectedCity];
+        
+    }
+    [super viewWillDisappear:animated];
+    if(!shouldNotDelete){
+        [messageController deleteMessage:[message Id]];
+    }
+}
+
+- (void)backButtonDidPressed:(id)aResponder {
+    NSLog(@"skal slette her");
+    
+    [self.navigationController popViewControllerAnimated:TRUE];
 }
 
 -(void)sendMessage{
@@ -193,32 +215,36 @@ MessageModel *message;
         
     }
     //[self setView:[[MainTableViewController alloc] init] second:@"friendsNavigation"];
-    MainTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friendsNavigation"];
+     [self.navigationController popToRootViewControllerAnimated:YES];
+    //MainTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friendsNavigation"];
     //[self.navigationController pushViewController:[[MainTableViewController alloc] init] animated:YES];
     //[self.navigationController popViewControllerAnimated:YES];
-     [self presentViewController:vc animated:YES completion:NULL];
+    // [self presentViewController:vc animated:YES completion:NULL];
 }
 
 -(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
     //self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
-   
-   // [self presentViewController:controller animated:YES completion:NULL];
-   
-    //[self presentationController an]
+    //[self.window makeKeyAndVisible];
+    [self.navigationController pushViewController:controller animated:NO];
+    
+    
 }
+
+
 
 
 
 -(void)handleSwipeGestureLeft{
     if(tisFromFriend){
+        /*
         NSLog(@"sqipe left");
         //composeViewController=[[ComposeViewController alloc] initWithNibName:@"ComposeViewController" bundle:[NSBundle mainBundle]];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
         composeViewController = [storyboard instantiateViewControllerWithIdentifier:@"compose"];
-        [composeViewController setMessageFriend:message];
+        
         CATransition *transition = [CATransition animation];
         transition.duration = 0.75;
         transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
@@ -228,6 +254,12 @@ MessageModel *message;
         [self.view.layer addAnimation:transition forKey:nil];
         [self.view addSubview:composeViewController.view];
         //[self presentViewController:composeViewController animated:NO completion:nil];
+        */
+        shouldNotDelete = YES;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        composeViewController = [storyboard instantiateViewControllerWithIdentifier:@"compose"];
+        [composeViewController setMessageFriend:message];
+         [self setView:composeViewController second:@"compose"];
     }
 
 }

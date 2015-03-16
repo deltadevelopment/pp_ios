@@ -30,6 +30,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)ImageIsUploaded{
+    NSLog(@"IMAGE IS uploaded navig");
+}
+
 /*
 #pragma mark - Navigation
 

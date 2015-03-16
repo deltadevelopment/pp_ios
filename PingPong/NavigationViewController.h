@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface NavigationViewController : UINavigationController
-
+-(void)ImageIsUploaded;
 @end

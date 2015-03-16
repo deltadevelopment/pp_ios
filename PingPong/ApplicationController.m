@@ -44,6 +44,11 @@
     
 }
 
+-(void)setNavigationController:(UINavigationController *) navigationController{
+    NSArray *viewControllers = navigationController.viewControllers;
+    mainTableViewController = [viewControllers objectAtIndex:0];
+}
+
 -(NSData*)getResp:(NSMutableURLRequest *) request{
     NSURLResponse *response;
     NSError *error;
@@ -123,7 +128,7 @@
 -(void)puttHttpRequestWithImage:(NSData *) imageData token:(NSString *) token{
     //POST/PUT to Amazon
     //STEP 2: Upload image to S3 with generated token from backend
-    
+    [mainTableViewController ImageStartedUploading];
     NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[imageData length]];
     
     // Init the URLRequest
@@ -162,7 +167,9 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
     CGFloat screenHeight = screenSize.height;
     if(percentageDownloaded == 100){
         NSLog(@"herja");
-        
+        if(mainTableViewController != nil){
+            [mainTableViewController ImageIsUploaded];
+        }
         //[self performSelector:imageUpload];
         MessageController *messageController = self;
         [messageController imageIsUploaded];
