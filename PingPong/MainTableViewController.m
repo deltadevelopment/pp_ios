@@ -39,6 +39,8 @@ UIImageView *addedIndicator;
 NSIndexPath *conversationCellId;
 UIActivityIndicatorView *activityIndicator;
 NSIndexPath *currentIndexPathAccepting;
+bool isAccepting;
+bool imageIsDoneUploading = YES;
 - (void)viewDidLoad {
     selectorTest = @selector(userDoesNotExist);
     successSelector = @selector(getRequestIsDone);
@@ -99,6 +101,7 @@ NSIndexPath *currentIndexPathAccepting;
 }
 
 -(void)ImageStartedUploading{
+    imageIsDoneUploading = NO;
     MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath:conversationCellId];
     cell.iconImage.image = nil;
     activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -127,6 +130,7 @@ NSIndexPath *currentIndexPathAccepting;
                          cell.iconImage.image = [UIImage imageNamed:@"camera.png"];
                          cell.iconImage.alpha = 1;
                          [[friends objectAtIndex:conversationCellId.row] setFriendType:2];
+                         imageIsDoneUploading = YES;
                      }];
     
 }
@@ -302,66 +306,70 @@ NSIndexPath *currentIndexPathAccepting;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)path
 {
-    bool toggle = NO;
-    MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
-    conversationCellId = path;
-    
-    MessageViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friend"];
-    ComposeViewController *vc2 = [self.storyboard instantiateViewControllerWithIdentifier:@"compose"];
-    if(path.section == 0){
-        FriendModel *friendModel = [friends objectAtIndex:path.row];
+    if(!isAccepting && imageIsDoneUploading){
+        bool toggle = NO;
+        MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+        conversationCellId = path;
         
-        /*
-         1 = konvoloutt
-         2 = bilde
-         3 = video
-         */
-        if([friendModel type] == 1){
-            //SE din venn
-            toggle = YES;
-            //[vc2 setShouldSendNew:NO];
+        MessageViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"friend"];
+        ComposeViewController *vc2 = [self.storyboard instantiateViewControllerWithIdentifier:@"compose"];
+        if(path.section == 0){
+            FriendModel *friendModel = [friends objectAtIndex:path.row];
             
-            [vc setFriend:friendModel withBool:YES];
-            [vc setColor:cell.backgroundColor];
-        }
-        else if([friendModel type] == 2 || [friendModel type] == 3){
-            //Se meg selv
-            //vise vc
-             //[vc2 setColor:cell.backgroundColor];
-            toggle = YES;
-            [vc setFriend:friendModel withBool:NO];
-            [vc setColor:cell.backgroundColor];
-        }
-        
-        else {
-            toggle = NO;
-            [vc2 setShouldSendNew:YES];
-            [vc2 setCurrentIndexPath:path];
-            [vc2 setColor:cell.backgroundColor];
-            [vc2 setFriend:friendModel];
-    
-        }
-        
-        NSLog(@" der: %@ ",[friendModel userId]);
-        
-        self.navigationItem.backBarButtonItem =
-        [[UIBarButtonItem alloc] initWithTitle:@""
-                                         style:UIBarButtonItemStyleBordered
-                                        target:nil
-                                        action:nil];
-        
-        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-        if(toggle){
-            [self.navigationController pushViewController:vc animated:YES];
+            /*
+             1 = konvoloutt
+             2 = bilde
+             3 = video
+             */
+            if([friendModel type] == 1){
+                //SE din venn
+                toggle = YES;
+                //[vc2 setShouldSendNew:NO];
+                
+                [vc setFriend:friendModel withBool:YES];
+                [vc setColor:cell.backgroundColor];
+            }
+            else if([friendModel type] == 2 || [friendModel type] == 3){
+                //Se meg selv
+                //vise vc
+                //[vc2 setColor:cell.backgroundColor];
+                toggle = YES;
+                [vc setFriend:friendModel withBool:NO];
+                [vc setColor:cell.backgroundColor];
+            }
+            
+            else {
+                toggle = NO;
+                [vc2 setShouldSendNew:YES];
+                [vc2 setCurrentIndexPath:path];
+                [vc2 setColor:cell.backgroundColor];
+                [vc2 setFriend:friendModel];
+                
+            }
+            
+            NSLog(@" der: %@ ",[friendModel userId]);
+            
+            self.navigationItem.backBarButtonItem =
+            [[UIBarButtonItem alloc] initWithTitle:@""
+                                             style:UIBarButtonItemStyleBordered
+                                            target:nil
+                                            action:nil];
+            
+            self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+            if(toggle){
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }else{
+                [self.navigationController pushViewController:vc2 animated:YES];
+            }
             
         }else{
-            [self.navigationController pushViewController:vc2 animated:YES];
+            FriendModel *friendModel = [friendRequests objectAtIndex:path.row];
+            //[vc setFriend:friendModel];
         }
-        
-    }else{
-        FriendModel *friendModel = [friendRequests objectAtIndex:path.row];
-        //[vc setFriend:friendModel];
+    
     }
+    
    
  
 
@@ -375,12 +383,13 @@ NSIndexPath *currentIndexPathAccepting;
 }
 
 -(void)acceptFriendRequest:(UITapGestureRecognizer *) sender{
+    isAccepting = YES;
     CGPoint tapLocation = [sender locationInView:self.tableView];
     NSIndexPath *tapIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
     FriendModel *friendRequest = [friendRequests objectAtIndex:tapIndexPath.row];
     //NSString *userId = [NSString stringWithFormat:@"%d", [friendRequest userId] ];
     
-    MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath:conversationCellId];
+    MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath:tapIndexPath];
     cell.iconImage.image = nil;
     activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     activityIndicator.alpha = 1.0;
@@ -404,10 +413,6 @@ NSIndexPath *currentIndexPathAccepting;
         });
         
     });
-    
-  
-
-    
 }
 -(void)refresh{
     [friendsController initFriends];
@@ -430,6 +435,7 @@ NSIndexPath *currentIndexPathAccepting;
                          
                      }
                      completion:^(BOOL finished){
+                          isAccepting = NO;
                          [self refresh];
                          [self.tableView reloadData];
                      }];

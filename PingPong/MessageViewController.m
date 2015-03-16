@@ -76,7 +76,12 @@ bool shouldNotDelete;
     }
     [super viewWillDisappear:animated];
     if(!shouldNotDelete){
-        [messageController deleteMessage:[message Id]];
+        if(tisFromFriend){
+            //slett melding
+            [messageController deleteMessage:[message Id]];
+            
+        }
+    
     }
 }
 
