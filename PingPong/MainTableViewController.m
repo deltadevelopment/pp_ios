@@ -41,7 +41,13 @@ UIActivityIndicatorView *activityIndicator;
 NSIndexPath *currentIndexPathAccepting;
 bool isAccepting;
 bool imageIsDoneUploading = YES;
+
+-(void)viewDidAppear:(BOOL)animated{
+  
+
+}
 - (void)viewDidLoad {
+    NSLog(@"VIEW LOADED");
     selectorTest = @selector(userDoesNotExist);
     successSelector = @selector(getRequestIsDone);
     added = @selector(imageIsDone);
@@ -95,9 +101,20 @@ bool imageIsDoneUploading = YES;
     self.navigationItem.rightBarButtonItem=mailbutton;
     
     
-    
+   
    // self.navigationItem.leftBarButtonItem
     
+}
+
+-(void)refreshOnDelete{
+    [self refresh];
+    [self.tableView reloadData];
+
+}
+
+-(void)cantSendToFriend:(NSString *) error{
+    MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath:conversationCellId];
+    cell.nameLabel.text = error;
 }
 
 -(void)ImageStartedUploading{
@@ -115,6 +132,7 @@ bool imageIsDoneUploading = YES;
 -(void)ImageIsUploaded{
     NSLog(@"IMAGE IS uploaded");
     //NSLog(@"%d",  conversationCellId);
+    [self refresh];
     activityIndicator.hidden = YES;
     [activityIndicator stopAnimating];
     MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath:conversationCellId];
@@ -131,6 +149,8 @@ bool imageIsDoneUploading = YES;
                          cell.iconImage.alpha = 1;
                          [[friends objectAtIndex:conversationCellId.row] setFriendType:2];
                          imageIsDoneUploading = YES;
+                         
+                         [self.tableView reloadData];
                      }];
     
 }
@@ -347,7 +367,7 @@ bool imageIsDoneUploading = YES;
                 
             }
             
-            NSLog(@" der: %@ ",[friendModel userId]);
+            //NSLog(@" der: %@ ",[friendModel userId]);
             
             self.navigationItem.backBarButtonItem =
             [[UIBarButtonItem alloc] initWithTitle:@""

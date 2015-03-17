@@ -39,8 +39,9 @@
     
     UIViewController *root = [[[[UIApplication sharedApplication] windows] objectAtIndex:0] rootViewController];
  
-    [root presentViewController: controller animated:YES completion:nil];
-    
+    //[root presentViewController: controller animated:YES completion:nil];
+   // UIViewController *vc = [window rootViewController];
+    //[vc presentViewController: yourVC animated:YES completion:nil];
     
 }
 

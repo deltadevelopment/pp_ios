@@ -17,4 +17,6 @@
 -(void)setCurrentIndexPath:(NSIndexPath *) indexPath;
 -(void)ImageIsUploaded;
 -(void)ImageStartedUploading;
+-(void)cantSendToFriend:(NSString *) error;
+-(void)refreshOnDelete;
 @end

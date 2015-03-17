@@ -41,9 +41,9 @@
  */
 
 -(void)downloadImage{
-        NSLog(@"Donwloading image with %@", _media_url);
+        //NSLog(@"Donwloading image with %@", _media_url);
         _media = [NSData dataWithContentsOfURL:[NSURL URLWithString:_media_url]];
-        NSLog(@"image donwloaded");
+        //NSLog(@"image donwloaded");
 
     
 }

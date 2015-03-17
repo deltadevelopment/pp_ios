@@ -79,6 +79,9 @@ bool shouldNotDelete;
         if(tisFromFriend){
             //slett melding
             [messageController deleteMessage:[message Id]];
+            NSArray *viewControllers = self.navigationController.viewControllers;
+            MainTableViewController *mainTableViewController = [viewControllers objectAtIndex:0];
+            [mainTableViewController refreshOnDelete];
             
         }
     
@@ -217,6 +220,9 @@ bool shouldNotDelete;
     if(tisFromFriend){
     //slett melding
         [messageController deleteMessage:[message Id]];
+        NSArray *viewControllers = self.navigationController.viewControllers;
+        MainTableViewController *mainTableViewController = [viewControllers objectAtIndex:0];
+        [mainTableViewController refreshOnDelete];
         
     }
     //[self setView:[[MainTableViewController alloc] init] second:@"friendsNavigation"];
